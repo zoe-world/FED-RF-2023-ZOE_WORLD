@@ -1,0 +1,172 @@
+@charset "utf-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap&family=Edu+SA+Beginner:wght@700&family=Moirai+One&display=swap&family=Poppins:wght@700&display=swap&family=Luckiest+Guy&display=swap");
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: "Pretendard", "Noto Sans KR", "바탕";
+    font-size: 1.6rem;
+    line-height: 1.3;
+}
+
+html,
+body,
+header,
+nav,
+main,
+footer,
+a,
+ul,
+li,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* 레이아웃 박스 공통 디자인 */
+.bx {
+    width: 750px;
+    margin: 0 auto 20px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 2px 15px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* 레이아웃 영역 */
+body {
+    
+}
+
+#wrap {
+    padding: 20px 0;
+    height: 100%;
+}
+
+#wrap[class^="wrap"] {
+    background: linear-gradient(#bbeeff, #ffcece);
+}
+
+/* 1. 상단영역 */
+header {
+    height: 185px;
+    background-color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+}
+
+header img {
+    width: 26px;
+    vertical-align: bottom;
+}
+
+header h1 {
+    margin: 20px 0;
+    color: #fff;
+    -webkit-text-stroke: 1px #000;
+    text-shadow: 7px 6px 1px #000;
+    font-family: "Luckiest Guy";
+    font-size: 7rem;
+}
+
+header h1 .rotate {
+    transform: rotate(45deg);
+}
+
+#gnb > a {
+}
+
+#gnb > a + a:hover::after,
+#gnb > a + a:focus::after {
+    width: calc(100% - 15px);
+}
+
+#gnb > a + a {
+    position: relative;
+    display: inline-block;
+    padding-left: 5px;
+    padding-right: 10px;
+    color: navy;
+    font-size: 2rem;
+}
+
+#gnb > a + a::before {
+    position: absolute;
+    bottom: 0;
+    display: inline-block;
+    content: "";
+    width: 0;
+    height: 1px;
+    transition: all 0.3s;
+    background-color: darkblue;
+}
+
+#gnb > a:first-child {
+    margin-right: 5px;
+}
+
+#gnb > a:not(:first-child):not(:last-child):after {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    content: "";
+    width: 1px;
+    height: 20px;
+    background-color: navy;
+}
+
+/* 2. 메인영역 */
+#cont {
+    background: rgba(255, 255, 255, 1);
+}
+
+.cimg {
+    width: 100%;
+}
+
+/* 3. 하단영역 */
+#info {
+    text-align: center;
+}
+
+#info address {
+    font-size: 1.7rem;
+    line-height: 1.7;
+}
+
+address {
+    font-style: normal;
+}
+
+address .utxt {
+    color: #252525;
+    font-family: "Poppins";
+    text-decoration-color: red;
+    text-decoration-style: dotted;
+    text-decoration-line: underline;
+    text-underline-offset: 3px;
+}
+
+/* 종속선택자로 같은 이름의 클래스인데 다른 디자인으로 변경하여 셋팅하기 */
+address b.utxt {
+    text-decoration-style: wavy;
+}

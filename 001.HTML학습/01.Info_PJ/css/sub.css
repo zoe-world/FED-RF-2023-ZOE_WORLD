@@ -1,0 +1,27 @@
+@charset "utf-8";
+/* 서브페이지용 CSS -  sub.css*/
+
+/* 공통외부 CSS 합치기 */
+@import url(./common.css);
+
+#wrap.wrap_01 {
+    background: linear-gradient(#D9AFD9,#97D9E1);
+}
+#wrap.wrap_02 {
+    background: linear-gradient(#98e4ff,#bdffe1);
+}
+#wrap.wrap_03 {
+    background: linear-gradient(#FAACA8,#DDD6F3);
+}
+#wrap.wrap_04 {
+    background: linear-gradient(#74EBD5,#9FACE6);
+}
+#wrap.wrap_05 {
+    background: linear-gradient(#FAACA8,#EEECF7);
+}
+#wrap.wrap_03 .bx,
+#wrap.wrap_05 .bx {
+    box-shadow: 0 2px 15px 0 rgba(135, 31, 88, 0.37);
+}
+/* 서브 타이틀 */
+.stit {text-align: center;}
