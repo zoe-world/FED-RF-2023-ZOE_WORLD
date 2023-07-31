@@ -53,12 +53,12 @@ a {
 
 /* 레이아웃 영역 */
 body {
-    
+    min-height: 100vh;
 }
 
 #wrap {
     padding: 20px 0;
-    height: 100%;
+    min-height: 100vh;
 }
 
 #wrap[class^="wrap"] {
