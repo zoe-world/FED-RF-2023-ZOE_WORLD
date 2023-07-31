@@ -1,71 +1,92 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <meta charset="UTF-8" />
-        <!-- 뷰포트: 모바일에서 실제 픽셀로 변환함 -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>네이버 요약뉴스 - 정치</title>
-        <!-- 외부공통CSS 불러오기 -->
-        <link rel="stylesheet" href="./css/sub.css">
-    </head>
 
-    <body>
-        <!-- 1. 상단영역 : 제목, 메뉴 -->
-        <div id="wrap" class="wrap_01">
-            <header id="top" class="bx">
-                <!-- 1-1.제목 -->
-                <h1>NAVER NEWS</h1>
-                <!-- 1-2.GNB메뉴 -->
-                <!-- GNB(Global Navigation Bar) -->
-                <nav id="gnb">
-                    <a href="index.html">
-                        <!-- 상대경로 -->
-                        <img src="./images/logo.png" alt="네이버 로고" />
-                        <!-- style속성으로 CSS를 셋팅하는 방법은 인라인 방식이라고 함! -->
-                        <!-- 절대상대경로 -->
-                        <!-- <img src="/001.HTML학습/01.Info_PJ/images/logo.png" alt="네이버 로고"> -->
-                        <!-- 절대경로 -->
-                        <!-- <img src="https://t1.daumcdn.net/daumtop_chanel/op/20200723055344399.png" alt="다음 로고"> -->
-                    </a>
-                    <a href="sub1.html">정치</a>
-                    <a href="sub2.html">경제</a>
-                    <a href="sub3.html">사회</a>
-                    <a href="sub4.html">IT/과학</a>
-                    <a href="sub5.html">TV/연예</a>
-                </nav>
-            </header>
-            <!-- 2. 메인영역 : 컨텐츠 -->
-            <main id="cont" class="bx">
-                <!-- 2-1. 서브타이틀 -->
-                <h2 class="stit">정치 뉴스</h2>
-                <!-- 2-2. 언론사 로고 -->
-                <div class="prlogo"></div>
-                <!-- 2-3. 기사제목 -->
-                <h3 class="atit"></h3>
-                <!-- 2-4. 기사사진 -->
-                <figure class="afig">
-                    <!-- 이미지 -->
-                    <img src="" alt="">
-                    <!-- 이미지설명 -->
-                    <figcaption></figcaption>
-                </figure>
-                <!-- 2-5. 기사내용 -->
-                <section class="acont"></section>
-                <!-- 2-6. 기자정봉 -->
-                <div class="rpt"></div>
-                <!-- 2-7. 기사원문 -->
-                <h5><a href=""></a></h5>
-            </main>
-            <!-- 3. 하단영역 : 회사정보 -->
-            <footer id="info" class="bx">
-                <address>
-                    서울시 강남구 역삼동 119 대호B 8F <br />
-                    대표: <span class="utxt">Tom Brace Parker</span><br />
-                    전화: <b class="utxt">010-2222-3333</b>
-                </address>
-            </footer>
-        </div>
-        <!-- 
+<head>
+    <meta charset="UTF-8" />
+    <!-- 뷰포트: 모바일에서 실제 픽셀로 변환함 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>네이버 요약뉴스 - 정치</title>
+    <!-- 외부공통CSS 불러오기 -->
+    <link rel="stylesheet" href="./css/sub.css">
+</head>
+
+<body>
+    <!-- 1. 상단영역 : 제목, 메뉴 -->
+    <div id="wrap" class="wrap_01">
+        <header id="top" class="bx">
+            <!-- 1-1.제목 -->
+            <h1>NAVER NEWS</h1>
+            <!-- 1-2.GNB메뉴 -->
+            <!-- GNB(Global Navigation Bar) -->
+            <nav id="gnb">
+                <a href="index.html">
+                    <!-- 상대경로 -->
+                    <img src="./images/logo.png" alt="네이버 로고" />
+                    <!-- style속성으로 CSS를 셋팅하는 방법은 인라인 방식이라고 함! -->
+                    <!-- 절대상대경로 -->
+                    <!-- <img src="/001.HTML학습/01.Info_PJ/images/logo.png" alt="네이버 로고"> -->
+                    <!-- 절대경로 -->
+                    <!-- <img src="https://t1.daumcdn.net/daumtop_chanel/op/20200723055344399.png" alt="다음 로고"> -->
+                </a>
+                <a href="sub1.html">정치</a>
+                <a href="sub2.html">경제</a>
+                <a href="sub3.html">사회</a>
+                <a href="sub4.html">IT/과학</a>
+                <a href="sub5.html">TV/연예</a>
+            </nav>
+        </header>
+        <!-- 2. 메인영역 : 컨텐츠 -->
+        <main id="cont" class="bx">
+            <h2 class="stit">정치 뉴스</h2>
+            <div class="prlogo">
+                <a href="https://www.inews24.com/" target="_blank" title="새창열림">
+                    <img src="./images/prlogo1.png" alt="The JongAng" />
+                </a>
+            </div>
+            <h3 class="atit">카디즈 밝힌 '영광의 불빛'...그날 파일럿 기내방송은 뭉클했다</h3>
+            <section class="acont">
+                <h4>저희 항공기는 한국방공식별구역을 진입하고 있습니다. 대한민국은 최임락 일병님을 포함한 7분의 호국영웅이 계셨기에 자유민주주의 국가로 거듭날 수 있었습니다.</h4>
+                <p>대통령실이 지난 26일 미국 하외이에 있던 한국전쟁 국군 전사자의 유해가 서울공항에 도착하기까지의 항공기 모습을 담은 영상을 28일 유튜브에 공개했다. 영상에는 봉환 임무를 맡은
+                    김태용 공군 소령의 기내방송이 담겨 있다.</p>
+            </section>
+            <figure class="afig">
+                <!-- 이미지 -->
+                <img src="./images/afig1.jpg" alt="지난 26일 6·25전쟁에서 전사한 고(故) 최임락 일병 등 국군 전사자 7위의 유해를 모신 공군 다목적공중급유수송기(KC-330, 시그너스)가 한국방공식별구역(KADIZ)에
+                진입하자 엄호비행을 맡은 F-35A 프리덤나이트 편대가 조포(弔砲)를 대신한 플레어를 발사하며 예우를 갖추고 있다." />
+                <!-- 이미지설명 -->
+                <figcaption>
+                    지난 26일 6·25전쟁에서 전사한 고(故) 최임락 일병 등 국군 전사자 7위의 유해를 모신 공군 다목적공중급유수송기(KC-330, 시그너스)가 한국방공식별구역(KADIZ)에
+                    진입하자 엄호비행을 맡은 F-35A 프리덤나이트 편대가 조포(弔砲)를 대신한 플레어를 발사하며 예우를 갖추고 있다. 공군=연합뉴스
+                </figcaption>
+            </figure>
+            <section class="acont">
+                <p>김 소령은 수송기가 한국방공식별구역(KADIZ)을 진입하자 고(故) 최 일병 등 유해 7위에 예우를 표하며 “지키고자 하셨던 숭고한 가치, 이제는 저희가 지켜나가겠습니다”라고 전했다. 이어 최 일병의 고향인 울산 상공을 지날 때는 “고향 울산은 73년 동안 많이 변했지만, 고국으로 모시고자 하는 저희의 마음은 변함이 없었습니다”라며 “이제는 저희가 지켜드리겠습니다. 필승”이라고 경례를 붙였다.</p>
+            </section>
+            <figure class="afig">
+                <!-- 이미지 -->
+                <img src="./images/afig1-2.jpg" alt="26일 오후 서울공항에 도착한 국군 전사자 유해가 공군 다목적 공중급유 수송기 시그너스(KC-330)에서 하기되고 있다." />
+                <!-- 이미지설명 -->
+                <figcaption>
+                    26일 오후 서울공항에 도착한 국군 전사자 유해가 공군 다목적 공중급유 수송기 시그너스(KC-330)에서 하기되고 있다. 대통령실통신사진기자단
+                </figcaption>
+            </figure>
+            <section class="acont">
+                <p>영상에는 수송기를 호위하던 F-35A 전투기 파일럿이 함께 경례하는 모습도 찍혀 있다. 또 조포(弔砲)를 대신한 플레어를 발사하며 예우를 다하는 모습이 담겨 있다.</p>
+                <p>윤석열 대통령은 이날 서울공항에서 유해를 직접 영접했다. 이날 봉환된 7위는 한국전쟁 당시 미군 전사자로 추정돼 하와이로 보내졌다가 이후 국군으로 판명돼 73년 만에 한국으로 복귀했다.</p>
+            </section>
+            <div class="rpt">임성빈 기자 <a href="mailto:im.soungbin@joongang.co.kr">im.soungbin@joongang.co.kr</a></div>
+            <h5><a href="https://n.news.naver.com/mnews/article/025/0003297170?sid=100" target="_blank">기사원문</a></h5>
+        </main>
+        <!-- 3. 하단영역 : 회사정보 -->
+        <footer id="info" class="bx">
+            <address>
+                서울시 강남구 역삼동 119 대호B 8F <br />
+                대표: <span class="utxt">Tom Brace Parker</span><br />
+                전화: <b class="utxt">010-2222-3333</b>
+            </address>
+        </footer>
+    </div>
+    <!-- 
         [ 웹표준이란? ]
         - 모든 브라우저에서 하나의 소스로 동일한 디스플레이 및 기능이 작동하도록 정한 웹 코딩의 표준안이다!
         
@@ -113,5 +134,7 @@
 
         
 
-    --></body>
+    -->
+</body>
+
 </html>
