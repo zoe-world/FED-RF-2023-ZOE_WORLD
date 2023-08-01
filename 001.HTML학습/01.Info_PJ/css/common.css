@@ -41,6 +41,9 @@ a {
     text-decoration: none;
     color: #252525;
 }
+img {
+    max-width: 100%;
+}
 
 /* 레이아웃 박스 공통 디자인 */
 .bx {
@@ -175,4 +178,28 @@ address .utxt {
 /* 종속선택자로 같은 이름의 클래스인데 다른 디자인으로 변경하여 셋팅하기 */
 address b.utxt {
     text-decoration-style: wavy;
+}
+
+/* medium size */
+@media(max-width: 768px) {
+    html {
+        font-size: 50%;
+    }
+    .wrap {
+        padding: 10px;
+    }
+    .bx {
+        width: 100%;
+    }
+    header.bx {
+        padding: 5px;
+        height: auto;
+    }
+    nav {
+        margin: 15px 0;
+    }
+}
+
+::selection {
+    background-color:  #97d9e1
 }

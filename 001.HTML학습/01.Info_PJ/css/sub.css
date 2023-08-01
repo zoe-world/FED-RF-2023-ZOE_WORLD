@@ -30,6 +30,7 @@
     margin-top: -1px;
     padding: 50px 0;
     width: calc(100% + 2px);
+
     /* background: 색이반고윙/크 
         배경색 이미지 반복 고정 위치 / 크기
     */
@@ -38,7 +39,9 @@
     background-position: 100% 45%;
     background-size: cover;
     color: #fff;
+    border-radius: 10px;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.87);
+    box-shadow: inset 0px 0px 9px 0px rgba(0, 0, 0, 0.67);
 }
 .wrap .stit::before {
     position: absolute;
@@ -49,8 +52,9 @@
     content: "";
     width: 100%;
     height: 100%;
+    border-radius: 10px;
     background-color: #000;
-    opacity: 0.37;
+    opacity: 0.17;
 }
 .wrap_02 .stit {
     background-image: url(../images/afig2.jpg);
@@ -91,25 +95,52 @@ p {
     font-size: 1.5rem;
 }
 .prlogo img {
-    width: 85px;
+    height: 32px;
 }
 .acont {
     margin-top: 30px;
     font-size: 1.6rem;
     line-height: 1.5;
+    text-align: justify;
 }
 .afig + .acont {
     margin-top: 45px;
 }
 .aric {
     margin-top: 10px;
+    text-align: right;
 }
 .aric a {
+    position: relative;
+    z-index: 1;
     display: inline-block;
     padding: 5px;
-    border: 2px solid #3f63bf;
+    border: 1px solid rgba(63, 99, 191,1);
+    box-shadow: 2px 2px 2px 2px rgba(63, 99, 191,0.21);
     color: #3f63bf;
     font-size: 1.5rem;
+    transition:all .3s cubic-bezier(0.075, 0.82, 0.165, 0.6);
+}
+.aric a::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    display: inline-block;
+    content: "";
+    width: 0;
+    height: 100%;
+    background-color: #3f63bf;
+    transform: translateX(0);
+    transition:all .3s cubic-bezier(.71,.02,.51,1.03);
+}
+.aric a:focus,
+.aric a:hover {
+    color: #fff;
+}
+.aric a:focus::before,
+.aric a:hover::before {
+    width: 100%;
 }
 .box {
     margin: 15px 0 10px;
@@ -138,5 +169,23 @@ p {
     font-size: 1.4rem;
 }
 .video_bx {
+    height: 450px;
     margin: 20px 0;
+    /* 
+        div 와 같은 block 요소는
+        width 설정을 하지 않으면 width:auto 로 자동설정됨.
+        이를 싸고 있는 박스 컨텐츠 영역을 자동으로 채워준다.
+    */
+}
+.video_bx iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* medium size */
+@media (max-width: 768px) {
+    .atit {
+        font-size: 2.5rem;
+    }
 }
