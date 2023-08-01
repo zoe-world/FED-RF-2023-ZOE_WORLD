@@ -1,82 +1,91 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <meta charset="UTF-8" />
-        <!-- 뷰포트: 모바일에서 실제 픽셀로 변환함 -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>네이버 요약뉴스 - 사회</title>
-        <!-- 외부공통CSS 불러오기 -->
-        <link rel="stylesheet" href="./css/sub.css">
-    </head>
 
-    <body>
-        <!-- 1. 상단영역 : 제목, 메뉴 -->
-        <div id="wrap" class="wrap wrap_03">
-            <header id="top" class="bx">
-                <!-- 1-1.제목 -->
-                <h1>NAVER NEWS</h1>
-                <!-- 1-2.GNB메뉴 -->
-                <!-- GNB(Global Navigation Bar) -->
-                <nav id="gnb">
-                    <a href="index.html">
-                        <!-- 상대경로 -->
-                        <img src="./images/logo.png" alt="네이버 로고" />
-                        <!-- style속성으로 CSS를 셋팅하는 방법은 인라인 방식이라고 함! -->
-                        <!-- 절대상대경로 -->
-                        <!-- <img src="/001.HTML학습/01.Info_PJ/images/logo.png" alt="네이버 로고"> -->
-                        <!-- 절대경로 -->
-                        <!-- <img src="https://t1.daumcdn.net/daumtop_chanel/op/20200723055344399.png" alt="다음 로고"> -->
-                    </a>
-                    <a href="sub1.html">정치</a>
-                    <a href="sub2.html">경제</a>
-                    <a href="sub3.html">사회</a>
-                    <a href="sub4.html">IT/과학</a>
-                    <a href="sub5.html">TV/연예</a>
-                </nav>
-            </header>
-            <!-- 2. 메인영역 : 컨텐츠 -->
-            <main id="cont" class="bx">
-                <h2 class="stit">사회 뉴스</h2>
-                <div class="prlogo">
-                    <a href="https://www.nocutnews.co.kr/" target="_blank" title="새창열림">
-                        <img src="./images/prlogo3.png" alt="노컷 뉴스" />
-                    </a>
-                </div>
-                <h3 class="atit">대만발 제주 우편물은 36건…테러 의심정황 없어</h3>
-                <div class="box">
-                    <h4>
-                        대만발 의심 우편물 신고 11건에 물품은 36건 <br> 
-                        폭발물과 방사능, 화학물질 검사결과 '이상 무'
-                    </h4>
-                </div>
-                <figure class="afig">
-                    <!-- 이미지 -->
-                    <img src="./images/afig3.jpg" alt="제주에 발송된 대만발 의심 우편물." />
-                    <!-- 이미지설명 -->
-                    <figcaption>제주에 발송된 대만발 의심 우편물. 제주도 제공</figcaption>
-                </figure>
-                <section class="acont">
-                    <p>제주도에는 최근 대만에서 발송된 우편물 36건이 신고됐고, 생물테러 등의 의심사항은 없는 것으로 나타났다</p>
-                    <p>제주도는 지난 20일부터 24일까지 대만에서 발송된 우편물 신고는 11건에 36개 물품이 접수됐고 검사결과 모두 특이사항은 없는 것으로 확인됐다고 밝혔다.</p>
-                    <p>36건 중 25개 물품은 제주 우편집중국이 우편물 분류과정에서 대만에서 발송된 것을 확인한 것이고 나머지는 개별적으로 신고했다</p>
-                    <p>제주도는 관계기관과 합동으로 대만발 우편물에 대한 검사를 실시한 결과 생물테러 등 의심사항은 발견되지 않았다고 설명했다.</p>
-                    <p>품목별로 보면 24개 물품은 수취인이 주문한 것으로 밝혀져 배송 조치됐고 나머지 물품은 검사가 이뤄졌다</p>
-                    <p>수취인이 확인되지 않은 12개 물품에 대해서는 안전한 장소에서 우편물을 개봉한 뒤 폭발물 검사, 방사능 검사, 화학물질 검사, 생화학 검사를 진행했고 모두 음성으로 확인됐다.</p>
-                    <p>또 5개 물품에 대해서는 현장 검사 후 보건환경연구원에서 정밀검사를 했으나 모두 음성이었다.</p>
-                    <p>이와 관련해 지난 24일 국무조정실 대테러센터는 현재까지 테러와 연관성은 없다고 밝혔는데 전국적으로 유사한 사례가 잇따라 '브러싱 스캠'을 의심하고 있다.</p>
-                    <p>브러싱 스캠은 주문하지 않은 물건을 불특정 다수에게 발송한 뒤 수신자로 가장해 상품 리뷰를 올리는 방식으로, 온라인 쇼핑몰 판매 실적과 평점을 조작하는 행위다.</p>
-                </section>
-                <div class="rpt">제주CBS 이인 기자 <a href="mailto:twoman@cbs.co.kr">twoman@cbs.co.kr</a></div>
-                <h5 class="aric"><a href="https://n.news.naver.com/mnews/article/079/0003795717?sid=102" target="_blank">기사원문</a></h5>
-            </main>
-            <!-- 3. 하단영역 : 회사정보 -->
-            <footer id="info" class="bx">
-                <address>
-                    서울시 강남구 역삼동 119 대호B 8F <br />
-                    대표: <span class="utxt">Tom Brace Parker</span><br />
-                    전화: <b class="utxt">010-2222-3333</b>
-                </address>
-            </footer>
-        </div>
-    </body>
+<head>
+    <meta charset="UTF-8" />
+    <!-- 뷰포트: 모바일에서 실제 픽셀로 변환함 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>네이버 요약뉴스 - 사회</title>
+    <!-- 외부공통CSS 불러오기 -->
+    <link rel="stylesheet" href="./css/sub.css">
+    <script src="./js/sub.js"></script>
+</head>
+
+<body>
+    <!-- 1. 상단영역 : 제목, 메뉴 -->
+    <div id="wrap" class="wrap wrap_03">
+        <header id="top" class="bx">
+            <!-- 1-1.제목 -->
+            <h1>NAVER NEWS</h1>
+            <!-- 1-2.GNB메뉴 -->
+            <!-- GNB(Global Navigation Bar) -->
+            <nav id="gnb">
+                <a href="index.html">
+                    <!-- 상대경로 -->
+                    <img src="./images/logo.png" alt="네이버 로고" />
+                    <!-- style속성으로 CSS를 셋팅하는 방법은 인라인 방식이라고 함! -->
+                    <!-- 절대상대경로 -->
+                    <!-- <img src="/001.HTML학습/01.Info_PJ/images/logo.png" alt="네이버 로고"> -->
+                    <!-- 절대경로 -->
+                    <!-- <img src="https://t1.daumcdn.net/daumtop_chanel/op/20200723055344399.png" alt="다음 로고"> -->
+                </a>
+                <a href="sub1.html">정치</a>
+                <a href="sub2.html">경제</a>
+                <a href="sub3.html">사회</a>
+                <a href="sub4.html">IT/과학</a>
+                <a href="sub5.html">TV/연예</a>
+            </nav>
+        </header>
+        <!-- 2. 메인영역 : 컨텐츠 -->
+        <main id="cont" class="bx">
+            <h2 class="stit">사회 뉴스</h2>
+            <div class="prlogo">
+                <a href="https://www.nocutnews.co.kr/" target="_blank" title="새창열림">
+                    <img src="./images/prlogo3.png" alt="노컷 뉴스" />
+                </a>
+            </div>
+            <h3 class="atit">대만발 제주 우편물은 36건…테러 의심정황 없어</h3>
+            <div class="box">
+                <h4>
+                    대만발 의심 우편물 신고 11건에 물품은 36건 <br>
+                    폭발물과 방사능, 화학물질 검사결과 '이상 무'
+                </h4>
+            </div>
+            <figure class="afig">
+                <!-- 이미지 -->
+                <img src="./images/afig3.jpg" alt="제주에 발송된 대만발 의심 우편물." />
+                <!-- 이미지설명 -->
+                <figcaption>제주에 발송된 대만발 의심 우편물. 제주도 제공</figcaption>
+            </figure>
+            <section class="acont">
+                <p>제주도에는 최근 대만에서 발송된 우편물 36건이 신고됐고, 생물테러 등의 의심사항은 없는 것으로 나타났다</p>
+                <p>제주도는 지난 20일부터 24일까지 대만에서 발송된 우편물 신고는 11건에 36개 물품이 접수됐고 검사결과 모두 특이사항은 없는 것으로 확인됐다고 밝혔다.</p>
+                <p>36건 중 25개 물품은 제주 우편집중국이 우편물 분류과정에서 대만에서 발송된 것을 확인한 것이고 나머지는 개별적으로 신고했다</p>
+                <p>제주도는 관계기관과 합동으로 대만발 우편물에 대한 검사를 실시한 결과 생물테러 등 의심사항은 발견되지 않았다고 설명했다.</p>
+                <p>품목별로 보면 24개 물품은 수취인이 주문한 것으로 밝혀져 배송 조치됐고 나머지 물품은 검사가 이뤄졌다</p>
+                <p>수취인이 확인되지 않은 12개 물품에 대해서는 안전한 장소에서 우편물을 개봉한 뒤 폭발물 검사, 방사능 검사, 화학물질 검사, 생화학 검사를 진행했고 모두 음성으로 확인됐다.</p>
+                <p>또 5개 물품에 대해서는 현장 검사 후 보건환경연구원에서 정밀검사를 했으나 모두 음성이었다.</p>
+                <p>이와 관련해 지난 24일 국무조정실 대테러센터는 현재까지 테러와 연관성은 없다고 밝혔는데 전국적으로 유사한 사례가 잇따라 '브러싱 스캠'을 의심하고 있다.</p>
+                <p>브러싱 스캠은 주문하지 않은 물건을 불특정 다수에게 발송한 뒤 수신자로 가장해 상품 리뷰를 올리는 방식으로, 온라인 쇼핑몰 판매 실적과 평점을 조작하는 행위다.</p>
+            </section>
+            <div class="rpt">제주CBS 이인 기자 <a href="mailto:twoman@cbs.co.kr">twoman@cbs.co.kr</a></div>
+            <h5 class="aric"><a href="https://n.news.naver.com/mnews/article/079/0003795717?sid=102"
+                    target="_blank">기사원문</a></h5>
+        </main>
+        <!-- 3. 하단영역 : 회사정보 -->
+        <footer id="info" class="bx">
+            <address>
+                서울시 강남구 역삼동 119 대호B 8F <br />
+                대표: <span class="utxt">Tom Brace Parker</span><br />
+                전화: <b class="utxt">010-2222-3333</b>
+            </address>
+        </footer>
+    </div>
+    <aside class="quick">
+        <a href="#" title="본문 처음으로" class="top_btn">
+            <span>TOP</span>
+        </a>
+    </aside>
+</body>
+
 </html>

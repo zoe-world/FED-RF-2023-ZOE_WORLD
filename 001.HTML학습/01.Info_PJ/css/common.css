@@ -57,7 +57,9 @@ img {
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
-
+html {
+    scroll-behavior: smooth;
+}
 /* 레이아웃 영역 */
 body {
     min-height: 100vh;
@@ -72,7 +74,15 @@ body {
 [class^="wrap"] {
     background: linear-gradient(#bbeeff, #ffcece);
 }
-
+/* 웹접근성 */
+.blind {
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+}
 /* 1. 상단영역 */
 header {
     height: 185px;
@@ -178,6 +188,23 @@ address .utxt {
 /* 종속선택자로 같은 이름의 클래스인데 다른 디자인으로 변경하여 셋팅하기 */
 address b.utxt {
     text-decoration-style: wavy;
+}
+
+/* go-top-btn */
+.quick {
+    position: fixed;
+    bottom: 100px;
+    right: 25%;
+}
+.top_btn {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    background-color: #979797;
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
 }
 
 /* medium size */
