@@ -1,0 +1,40 @@
+@charset "utf-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap&family=Edu+SA+Beginner:wght@700&family=Moirai+One&display=swap&family=Poppins:wght@700&display=swap&family=Luckiest+Guy&display=swap");
+
+/* 아카이브 메인 CSS - main.css*/
+
+/* 초기화 */
+html, body, h1, h2, h3, ul, ol { margin: 0; padding: 0; }
+
+html {
+    font-size: 62.5%;
+}
+
+/* 전체배경이미지 */
+body {
+    background: url(../imgs/worksbg.jpg) no-repeat fixed center/cover;
+    /* 전체 글자체 */
+    font-family: "Pretendard", "Noto Sans KR";
+    /* 전체 글자기본크기 */
+    font-size: 1.7rem;
+}
+
+/* 전체박스 */
+.wrap {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.514);
+}
+
+/* 메인타이틀 */
+.tit {
+    font-weight: normal;
+    text-align: center;
+}
+
+.tit .txt {
+    display: block;
+}
