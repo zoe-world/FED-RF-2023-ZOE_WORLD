@@ -31,7 +31,8 @@ h4,
 h5,
 h6,
 figure,
-p {
+p,
+blockquote {
     margin: 0 auto;
     padding: 0;
     box-sizing: border-box;
