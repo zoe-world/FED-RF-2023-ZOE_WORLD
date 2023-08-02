@@ -103,6 +103,19 @@ p {
     line-height: 1.5;
     text-align: justify;
 }
+.acont mark {
+    display: block;
+    margin: 15px auto;
+    padding: 20px;
+    width: 65%;
+    background-color: #e4e4e4;
+    border-top: 2px solid #aaaaaa;
+    border-bottom: 2px solid #aaaaaa;
+    color: orangered;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+}
 .afig + .acont {
     margin-top: 45px;
 }
@@ -161,14 +174,19 @@ p {
     color: #3f63bf;
     text-decoration: underline;
 }
+
 .desc h5 {
-    margin-top: 10px;
-    font-size: 1.5rem;
+
 }
-.subsc {
-    margin-top: 5px;
-    font-size: 1.4rem;
+
+/* 강조em요소 디자인변경 */
+.acont p em {
+    /* 이탤릭해제 */
+    font-style: normal;
+    color: #000;
+    text-shadow: 1px 1px 1px #ffbebe;
 }
+
 .video_bx {
     height: 450px;
     margin: 20px 0;
@@ -182,6 +200,55 @@ p {
     width: 100%;
     height: 100%;
     border: none;
+}
+
+/* article 제목공통 - .atbx */
+.atbx {
+    margin: 20px 0;
+}
+.atbx h5 {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ebebeb;
+    border-radius: 10px;
+    box-shadow: inset 0 0 7px 2px rgba(0,0,0,0.25);
+    font-size: 1.5rem;
+}
+
+/* blockquote */
+.ct_bx {
+    padding: 20px;
+    margin: 20px 0;
+    border-top: 2px dashed #ccc;
+    border-bottom: 2px dashed #ccc;
+}
+
+.ct_bx img {
+    float: right;
+    margin-left: 20px;
+    border-radius: 5px;
+}
+.ct_bx blockquote {
+    line-height: 2;
+    font-size: 1.5rem;
+}
+
+/* 주해 */
+.desc {
+    padding: 20px 0 0;
+    border-top: 1px solid #ccc;
+}
+.subsc {
+    margin-top: 5px;
+    padding: 10px;
+    font-size: 1.4rem;
+}
+
+/* 오늘의 작품 */
+.work {
+    padding: 50px;
+    background: linear-gradient();
+    text-align: center;
 }
 
 /* medium size */
