@@ -246,11 +246,40 @@ p {
 
 /* 오늘의 작품 */
 .work {
+
+    /*
+        배경옵션 추가
+        background-clip : 배경이 적용되는 범위 설정
+        1. border-box -> 보더까지 적용 (기본값)
+        2. padding-box -> 패딩까지 적용
+        3. content-box -> 내용 영역만 적용
+    
+     */
+    background-clip: content-box;
+    border: 50px dotted #3f63bf;
     padding: 50px;
-    background: linear-gradient();
+    background: linear-gradient(45deg, #3f63bf 20%, #74ebd5 80%);
     text-align: center;
 }
-
+.work h3 {
+    margin-bottom: 15px;
+    font-family: "Luckiest Guy";
+    font-size: 3.6rem;
+}
+.work img {
+    border: 15px ridge goldenrod
+}
+.work figcaption {
+    padding: 20px;
+    font-size: 2rem;
+    font-weight: 500;
+}
+/* 작품명 인용 */
+.work figcaption cite {
+    text-decoration: underline;
+    font-style: normal;
+    font-weight: bold;
+}
 /* medium size */
 @media (max-width: 768px) {
     .atit {
