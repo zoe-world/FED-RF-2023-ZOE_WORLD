@@ -286,3 +286,65 @@ p {
         font-size: 2.5rem;
     }
 }
+
+/* 뉴스영역 */
+.nbx {
+    margin: 20px 0;
+    padding: 20px 0;
+}
+.nbx + .nbx {
+    border-top: 5px dotted #ccc;
+}
+.nbx h3 {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-image: linear-gradient(to right, lightblue 10%, transparent 100%);
+    font-size: 2rem;
+}
+.nbx a {
+    position: relative;
+    padding-bottom: 5px;   
+    font-size: 1.7rem;
+    line-height: 2.5;
+    transition: all .3s;
+}
+.nbx a::before {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: block;
+    content: "";
+    width: 0;
+    height: 2px;
+    background-color: #3f63bf;
+    transition: all ease-in .3s;
+}
+.nbx a:focus,
+.nbx a:hover {
+    color: #3f63bf;
+}
+.nbx a:focus:before,
+.nbx a:hover::before {
+    width: 100%;
+}
+
+/* CSS 가상요소 : before, after 이미지 사용 가능 */
+.cnews ul li::before {
+    content: "🎈";
+}
+.cnews ul li::after {
+    content: "🎁";
+    /* content: url(../images/prlogo1.png); 
+        이미지도 삽입 가능
+    */
+}
+.snews dt {
+    margin: 15px 0 5px;
+    padding: 15px;
+    display: inline-block;
+    background-color: yellowgreen;
+    outline: 4px dashed #74ebd5;
+    border-radius: 50%;
+    font-weight: 600;
+    font-size: 2rem;
+}
