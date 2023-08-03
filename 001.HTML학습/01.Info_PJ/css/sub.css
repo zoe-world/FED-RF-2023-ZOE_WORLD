@@ -328,6 +328,21 @@ p {
     width: 100%;
 }
 
+/* 한 줄 처리 */
+.nbx li, .nbx dd, .nbx td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* 
+        추가 여러줄일경우, 말줄임
+        display: -webkit-box;
+        -webkit-line-clamp: 라인수;
+        -webkit-box-orient: vertical;
+        height: 높이값 지정;
+        >>> white-space: nowrap; 을 지정하면 안됨
+        
+    */
+}
 /* CSS 가상요소 : before, after 이미지 사용 가능 */
 .cnews ul li::before {
     content: "🎈";
@@ -348,3 +363,28 @@ p {
     font-weight: 600;
     font-size: 2rem;
 }
+/* 분야별 뉴스 dt별 글자색, 배경색 변경하기 */
+.snews dt:first-of-type {
+    color: red;
+    background-color: #ffc9c9;
+}
+.snews dt:nth-of-type(2) {
+    color: green;
+    background-color: #d0ffeb;
+}
+.snews dt:last-of-type {
+    color: blue;
+    background-color: #d0e4ff;
+}
+/* 
+    [ 자식요소 선택 가상클래스 : 자식요소 종류가 같아야함! ]
+        요소:first-child -> 첫번째 자식요소
+        요소:nth-child(n) -> n번째 자식요소
+        요소:last-child -> 마지막째 자식요소
+    [ 여러종류가 섞여 있을 경우 형제 선택하기 ]
+        요소:first-of-type -> 같은 요소 중 첫번째
+        요소:nth-of-type(n) -> 같은 요소 중 n번째
+        요소:last-of-type -> 같은 요소 중 마지막째 
+
+        (단, n은 1부터)
+*/
