@@ -72,14 +72,48 @@
                     크기를 설정할 수 없기 때문이다!
                     -> 일반적으로 앱솔루트 포지션요소는 블록이다!!
 
+                4.  앱솔루트 끼리는 서로 겹친다.
+
+                5. 앱솔루트 자식요소는 부모 박스가 overflow: hidden 으로 셋팅되어 있을 때, 
+                부모자격이 있어야만(postion: relative, fixed, sticky, absolute 등등) 숨겨진다!
+
+                6.위치설정값과 같은 방향의 마진만 적용됨! 예컨데 bottom 으로 위치이동하였으면 
+                margin-bottom만 적용된다!
+                (위치 이동값이 없는 앱솔루트의 마진은? 기본적으로 top,left를 기준하므로 같은 방향의 마진만 적용된다!)
+
+                7.위치이동값의 초기화는? top : 50px -> 초기화는? -> top: auto
+                초기화는 언제하나? 기존에 셋팅된 위치이동값을 다른 기준으로 변경할 경우, 초기화를 사용한다!
+                ex) top:30px 이미 선언
+                -> bottom 기준으로 변경해야할 경우
+                top:auto;
+                bottom: 50px; 
+
+                8. 위치이동값을 전부 다 쓰는 경우도 있다! -> 부모박스를 가득 채우거나 일정위치를 잡고,
+                크기가 유동적이어야 할 때 사용함!
+                
+                ex) 부모박스를 채우는 앱솔루트는?
+                position:absolute;
+                top:0;
+                left:0;
+                right:0;
+                bottom:0;
+                (단, width, height값을 설정 안함!!!)
+                
+
             **************************************/
             background: url(./images/ab1.jpg) no-repeat center/cover;
         }
+        /* 두번째 absolute */
         #a2 {
             position: absolute;
             bottom: 0;
             right: 0;
-            /* 부모는? 보이는 화면이 window가 부모 (body는 static이므로 부모 아님, html 는 부모자격이 없음) */
+            /* 위치설정값과 같은 방향의 마진만 적용됨! */
+            margin-bottom: 50px;
+            margin-right: 50px;
+/*             margin-top: 50px;
+            margin-left: 50px; */    
+        /* 부모는? 보이는 화면이 window가 부모 (body는 static이므로 부모 아님, html 는 부모자격이 없음) */
             background: url(./images/ab1.jpg) no-repeat center/cover;
         }
         #r1{
@@ -95,8 +129,8 @@
         /* 또하나의 relative */
         #r2{
             position: relative;
-            bottom: 10px;
-            right: -70px;
+            bottom: 137px;
+            right: -192px;
             background: url(./images/ab4.jpg) no-repeat center/cover;
 
         }
@@ -146,9 +180,15 @@
 
         /*  부모를 찾는 앱솔루트 .a4 */
         .a4{
-            top: 0;
+            /* top: 0; */
+            /* 위치값을 지정한 것만 부모위치 기준으로 이동을 하고,
+                위치값을 지정안하면, 젠틀하게 앱솔주기 전 위치를 유지한다.
+            */
             left: 0;
-            /* 나의 부모는? */
+            /* 나의 부모는? s7*/
+            width: 25%;
+            height: 40%;
+            /* 앱솔루트 요소 크기를 %로 주면, %기준은 부모자격박스를 기준으로 한다 */
         }
 
         /* span을 absolute로 만들 경우!*/
@@ -159,25 +199,97 @@
             /* 나의 부모는 s7 */
             border: 4px dotted red;
         }
+        /* 앱솔루트 : 판타롱스타킹 */
+        .a5{
+            position: absolute;
+            /* 크기를 안주면 내용만큼 늘어남 */
+            top: 20%;
+            right: 10%;
+            /* 부모는? window */
+            outline: 2px solid red;
+        }
+        /* 블록박스 내의 단독 이미지 */
+        .a5 img {
+            vertical-align: top;
+            /* 
+                박스에 단일한 이미지를 넣을 경우
+                하단에 자연스런 간극이 존재한다!(4px)
+                이것을 없애려면 vertical-align 인라인 요소간 세로정렬 속성의 값으로 
+                top/bottom/middle 중 어떤 것을 써도 하단간극이 사라진다!
+            */
+        }
+        /* 앱솔루트끼리는 서로 겹친다 */
+        .absimg{
+            width: 92px;
+            height: 115px;
+            border: 10px ridge goldenrod;
+            margin: 0 auto;
+            /* 박스 원형 만들기 */
+            border-radius: 50%;
+            /* 넘치는 이미지 숨기기 */
+            overflow: hidden;
+            /* 박스의 자식으로 앱솔루트가 있을 때 overflow:hidden 은 부모 자격이 있는 박스에서만 숨길 수 있다!! */
+            position: relative;
+
+        }
+        .absimg img{
+            position: absolute;
+            /* 젠틀앱솔루트이기 때문에 부모자격 없는 일반 static 요소여도
+                위치값을 주지 않았기에, 그자리에 이미지가 가만히 있음!
+                -> 앱솔루트 이미지끼리는 서로 겹쳐짐 
+                위,아래 관계는 html에서 선언된 순서대로 쌓임
+                z-index로 위치관계 조정 가능!
+            */
+        }
+
+        /* 두번째 이미지 닥스만 투명하게 만들기 */
+        .absimg img:last-child {
+            /* 투명도: opacity(0-투명, 1-불투명, 0.몇-반투명) */
+            opacity: 0;
+            /* 트랜지션 : transition - trs 
+                transition: 속성 시간 이징 지연시간(속시이지)
+                -> 두가지 속성값 변경을 애니메이션 해주는 속성
+                all 이 기본값이기떄문에, 간만 쓰면 모든 속성변경을 애니메이션 함 
+                시간은 초단위 s를 사용하여 표시함
+                transition: prop time;
+            */
+            transition: .5s;
+        }
+        
+        /* 박스에 오버시 닥스 보이기 */
+        .absimg:hover img:last-child {
+            opacity: 1;
+        }
 
     </style>
 </head>
 <body>
     <div class="bx" id="r1">r1</div>
     <div class="bx" id="s1">s1</div>
-    <div class="bx" id="a1">a1</div>
+    <div class="bx" id="a1" title="나는 젠틀앱솔루트다!">a1</div>
     <div class="bx" id="r2">r2</div>
     <div class="bx" id="s2">s2</div>
-    <div class="bx" id="a2">a2</div>
+    <div class="bx" id="a2" title="나는 보이는 화면이 기준이다! 부모가 없어서 ㅜ.ㅜ">a2</div>
+    
+    <!-- 앱솔루트 : 판타롱스타킹 -->
+    <div class="a5" title="앱솔루트 판타롱스타킹~!">
+        <img src="./images/ab2.jpg" alt="타노스">
+    </div>
+    
+    <!-- 앱솔루트끼리는 서로 겹친다 -->
+    <div class="absimg">
+        <img src="./images/ab3.jpg" alt="토르">
+        <img src="./images/ab4.jpg" alt="닥스">
+    </div>
 
     <!-- 부모를 찾는 앱솔루트! -->
     <div class="bx2 s5">s5
         <div class="bx2 s6">s6
             <div class="bx2 s7">s7
                 <div class="bx2 s8">s8
-                    <div class="abs a3">a3</div>
-                    <div class="abs a4">a4</div>
-                    <span class="spabs">
+                    <div class="abs a3" title="나는 젠틀앱솔루트다!">a3</div>
+                    <div class="abs a4" title="나는 부모찾아올라간다!">a4</div>
+                    <span class="spabs" title="자동블록전환!!!">
                         나는 span앱솔루트다!
                     </span>
                 </div>
