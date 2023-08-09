@@ -24,6 +24,16 @@ body {
 body * {
     outline: 2px dashed yellow;
 }
+/* 공통 클래스 */
+
+/* 메탈배경 클래스 */
+.metal1{
+    background: url(../images/metal01.jpg) no-repeat center/cover;
+}
+.metal2{
+    background: url(../images/metal02.jpg) no-repeat center/cover;
+}
+
 /****************** 1. 상단영역 ******************/
 /* 1-1. 로고 */
 /* 1-2. 링크타이틀 */
@@ -40,13 +50,15 @@ body * {
 /* 2-1. 로봇박스 */
 .box-robot{
     /* 패딩 : 위, 양쪽, 아래 */
-    padding: 200px 0 50px;
+    padding: 200px 0 530px;
     /* 마진탑 */
     /* margin-top: 30px; */
 }
 /* 2-1-1. 머리 */
 .head{
     position: relative;
+    /* .body보다 위 */
+    z-index: 1;
     /* 무대중앙 마영오! */
     margin: 0 auto;
     width: 190px;
@@ -75,8 +87,9 @@ body * {
     height: 308px;
     background-image: url(../images/hair2.png);
 }
-/* 머리 하위요소 공통 */
-.head>div {
+/* 머리/몸통 하위요소 공통 - 그룹선택자*/
+.head>div, 
+.body>div {
     position: absolute;
     /* 모든 직계하위 요소는 앱솔루트 */
 }
@@ -142,6 +155,193 @@ body * {
 }
 
 /* 2-1-2. 몸통 */
+.body{
+    position: relative;
+    /* 부모자격임 - 하위직계자식 div는 앱솔루트 */
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 220px;
+    height: 400px;
+    background-size: 80%;
+    /* 배경이미지 사이즈 조정하기 
+        - 가로크기 80%, 세로크기 auto(생략가능)
+    */
+ }
+/* 몸통의 가상요소로 상체만들기 */
+.body::before{
+    content: '';
+    display: block;
+    position: absolute;
+    top: -4px;
+    left: -18px;
+    width: 257px;
+    height: 200px;
+    background-image: linear-gradient(to top, #ff8300, #00c1b4);
+    border-radius: 30px;
+}
+/* 몸통의 가상요소로 하체만들기 */
+.body::after{
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -10px;
+    left: -18px;
+    width: 257px;
+    height: 140px;
+    background-image: linear-gradient(to top, #00c1b4, #ff8300);
+    border-radius: 30px;
+}
+
+/* 목 */
+.neck{
+    top: -70px;
+    left: calc(50% - 50px/2);
+    /* 중앙보내기 원리 부모박스의 50%보내고
+        자신 크기의 절반을 뺴면 됨
+        자신크기는 left는 width, top은 height 이다
+    */
+    width: 50px;
+    height: 80px;
+    border-radius: 20px;
+}
+/* 팔 공통 */
+.arm{
+    width: 50px;
+    height: 200px;
+    border-radius: 20%;
+}
+/* 왼팔 */
+.arm1{
+    left: -70px;
+}
+/* 오른팔 */
+.arm2{
+    right: -70px;
+}
+/* 팔하단부분 공통 */
+.arm span{
+    /* 부모는? .arm */
+    position: absolute;
+    top: 100%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    border-radius: 20%;
+}
+/* 가상요소로 손만들기 */
+.arm span::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: calc(50% - 60px/2);
+    width: 60px;
+    height: 100px;
+    background: url(../images/hand_left.png) no-repeat 0/100%;
+}
+
+/* 공통 left 조정 후 미세한 위치조정은 margin으로 하자! */
+/* 왼손 가상요소 변경 */
+.arm1 span::after{
+    margin-left: 5px;
+}
+/* 오른손 가상요소 변경 */
+.arm2 span::after{
+    background-image: url(../images/hand_right.png);
+    margin-left: -5px;
+}
+/* 다리 공통 */
+.leg{
+    top: 95%;
+    /* 부모박스 높이값만큼 100%로 밀려서 나감 */
+    width: 80px;
+    height: 250px;
+    border-radius: 20%;
+}
+/* 가상요소로 무릎만들기 */
+.leg::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: calc(100% - 70px/2);
+    left: calc(50% - 70px/2);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-image: linear-gradient(to right, #fff, #000);
+    border: 5px double #000;
+    box-sizing: border-box;
+}
+/* 가상요소로 부츠만들기 */
+.leg span::before{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: -5%;
+    width: 110%;
+    height: 80%;
+    border-top: 5px solid #000;
+    background-image:linear-gradient(to right, #fff,#000);
+    box-sizing: border-box;
+}
+/* 가상요소로 부츠만들기 */
+.leg span::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 110%;
+    left: -20%;
+    width: 140%;
+    height: 60px;
+    border-radius: 40px 40px 0 0;
+    border: 2px solid #000;
+    border-bottom: 10px solid #000;
+    background-image:linear-gradient(to right, #fff,#000);
+    box-sizing: border-box;
+}
+/* 왼다리 */
+.leg1{
+    left:10px;
+}
+/* 오른다리 */
+.leg2{
+    right:10px;
+}
+/* 다리하단부분 공통 */
+.leg span{
+    /* 부모는? .leg */
+    position: absolute;
+    top: 100%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    border-radius: 20%;
+}
+/* 어꺠공통 */
+.shdr{
+    top: -15px;
+    width: 80px;
+    height: 80px;
+}
+/* 왼어깨 */
+.shdr1{
+    left: -85px;
+    border-radius: 50% 0 0 50%;
+    /* 
+        [ 둥근 모서리 값 설정 ]
+        1. 1개 - 네방향
+        2. 2개 - 왼위 오른아래 / 오른위 왼아래
+        3. 3개 - 왼위 / 오른위, 왼아래 / 오른아래
+        4. 4개 - 왼위 / 오른위 / 오른아래 / 왼아래
+    */
+}
+/* 오른어깨 */
+.shdr2{
+    right: -85px;
+    border-radius: 0 50% 50% 0;
+}
+/* TV */
 /* 2-2. 로봇설명박스 */
 /****************** 3. 하단영역 ******************/
 /* 3-1. 회사정보 */
