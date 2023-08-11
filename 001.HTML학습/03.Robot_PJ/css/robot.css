@@ -77,6 +77,12 @@ body * {
     padding: 200px 0 530px;
     /* 마진탑 */
     /* margin-top: 30px; */
+
+    /* 처음에 트랜스폼 변경설정 */
+    transform: translate(28%,-9%) scale(0.2);
+
+    position: fixed;
+    width: 100%;
 }
 /* 2-1-1. 머리 */
 .head{
@@ -233,6 +239,8 @@ body * {
     width: 50px;
     height: 200px;
     border-radius: 20%;
+    /* 팔 트랜스폼 회전축변경 */
+    transform-origin: left top;
 }
 /* 가상요소로 팔관절만들기 */
 .arm::before{
@@ -307,6 +315,8 @@ body * {
     width: 80px;
     height: 250px;
     border-radius: 20%;
+    /* 애니를 위한 트랜스폼 기준축 변경 */
+    transform-origin: top;
 }
 /* 가상요소로 무릎관절만들기 */
 .leg::before{
@@ -406,9 +416,10 @@ body * {
 }
 /* TV */
 .tv{
+    z-index: 10;
     top: 8%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) scale(1);
     /* left 중앙이동 */
     width: 180px;
     height: 125px;
@@ -417,7 +428,15 @@ body * {
     box-shadow: inset 0 0 10px #333;
     /* 배경이미지 */
     background: url(../images/tv.jpg) no-repeat 0/100%;
+
+    /* 트랜지션: 속시이지 */
+    /* transition: transform 1.2s ease-in-out; */
 }
+/* TV가 커지는 클래스 */
+.tv.on{
+    transform: translateX(-50%) scale(3);
+}
+/* 스크린 */
 .screen{
     overflow: hidden;
     position: absolute;
@@ -436,6 +455,21 @@ body * {
     left: -19px;
     width: 175px;
     height: 100px;
+    /* 부모는? .screen */
+
+    /* iframe 기본 보더 없앰 */
+    border: none;
+}
+/* 동영상 선택 버튼 */
+.box-btn{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    height: 90px;
+}
+.box-btn button{
+    width: 100%;
 }
 /* 2-2. 로봇설명박스 */
 /****************** 3. 하단영역 ******************/
