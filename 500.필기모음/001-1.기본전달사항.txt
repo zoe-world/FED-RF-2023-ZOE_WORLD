@@ -60,4 +60,7 @@ https://youtu.be/EKFM5yeXdck
 수단과 방법을 인터페이스라고함!
 
 ㄱㄱㄱㄱ
+<<<<<<< HEAD
 
+=======
+>>>>>>> d129d8f9ea1e0c857ce46ac8744598e3ae4aa7d8
