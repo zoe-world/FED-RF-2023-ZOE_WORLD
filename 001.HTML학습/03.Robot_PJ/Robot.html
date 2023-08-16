@@ -68,7 +68,11 @@
                         <div class="tv">
                             <div class="screen">
                                 <!-- 유툽 동영상 -->
-                                <iframe src="https://www.youtube.com/embed/3P1CnWI62Ik" id="mv" allow="autoplay"></iframe>
+                                <iframe
+                                    src="https://www.youtube.com/embed/3P1CnWI62Ik"
+                                    id="mv"
+                                    allow="autoplay"
+                                ></iframe>
                                 <!-- 
                                     영상아이디
                                     1. 3P1CnWI62Ik
@@ -93,6 +97,29 @@
                     </div>
                 </section>
                 <!-- 2-2. 로봇설명박스 -->
+                <section class="box-text">
+                    <h2>Robot</h2>
+                    <div class="desc">
+                        A robot is a machine—especially one programmable by a computer—capable of carrying out a complex
+                        series of actions automatically.[2] A robot can be guided by an external control device, or the
+                        control may be embedded within. Robots may be constructed to evoke human form, but most robots
+                        are task-performing machines, designed with an emphasis on stark functionality, rather than
+                        expressive aesthetics. Robots can be autonomous or semi-autonomous and range from humanoids such
+                        as Honda's Advanced Step in Innovative Mobility (ASIMO) and TOSY's TOSY Ping Pong Playing Robot
+                        (TOPIO) to industrial robots, medical operating robots, patient assist robots, dog therapy
+                        robots, collectively programmed swarm robots, UAV drones such as General Atomics MQ-1 Predator,
+                        and even microscopic nano robots. By mimicking a lifelike appearance or automating movements, a
+                        robot may convey a sense of intelligence or thought of its own. Autonomous things are expected
+                        to proliferate in the future, with home robotics and the autonomous car as some of the main
+                        drivers.[3] The branch of technology that deals with the design, construction, operation, and
+                        application of robots,[4] as well as computer systems for their control, sensory feedback, and
+                        information processing is robotics. These technologies deal with automated machines that can
+                        take the place of humans in dangerous environments or manufacturing processes, or resemble
+                        humans in appearance, behavior, or cognition. Many of today's robots are inspired by nature
+                        contributing to the field of bio-inspired robotics. These robots have also created a newer
+                        branch of robotics: soft robotics.
+                    </div>
+                </section>
             </main>
         </div>
         <!-- 3. 하단영역 -->
@@ -107,48 +134,45 @@
             // 한줄주석
             /* 여러줄 주석 */
 
-            // JS가 하는 일 
+            // JS가 하는 일
             // 1. HTML 변경
             // 2.  CSS 변경
 
             // JS가 필수로 하는 것은?
             // 요소 선택하기!
             // element -> 요소 -> 태그
-            // 요소들이 모여있는 웹문서 전체구조 -> DOM 
+            // 요소들이 모여있는 웹문서 전체구조 -> DOM
             // Document Object Model
 
             // 보관장소 = 물건
 
             //document 객체를 통하여 하위요소들로 접근!
             // 여기를 보ㅏ~~!!var (변수선언)
-            var 나야나 = document.getElementById('mv').src;
-            
-            
+            var 나야나 = document.getElementById("mv").src;
+
             // JS는 명령어 끝에 꼭 세미콜론;
             // 콘.................솔
             //console
             // 로.................그
             //log
-            console.log("내꺼얌",나야나)
+            console.log("내꺼얌", 나야나);
 
             //콘솔위치 : f12 개발자 모드 -> console 탭
 
-            
             //함수는 코드를 저장하는 장소
             //함수를 호출시 함수내부의 코드가 실행됨!!
             //function 함수명(전달변수){코드}
-            function 바꿔(먹이){
+            function 바꿔(먹이) {
                 //console.log('영상바꿔',먹이);
 
                 //아이프레임요소.src = 동영상값
-                document.getElementById('mv').src = 
-                'https://www.youtube.com/embed/' + 먹이 + '?autoplay=1';
+                document.getElementById("mv").src = "https://www.youtube.com/embed/" + 먹이 + "?autoplay=1";
 
                 //src에 할당된 값
-                 console.log('src할당값:', 'https://www.youtube.com/embed/' + 먹이);
-            }/////////// 바꿔함수 ///////////
+                console.log("src할당값:", "https://www.youtube.com/embed/" + 먹이);
+            } /////////// 바꿔함수 ///////////
             /////////////////////////////////
-            
+
             // TV 배율변경 클래스 적용함수 //
             /************************ 
                 함수명: 커짐
@@ -159,8 +183,8 @@
                 수정자
                 수정내용
              ************************/
-            function 커짐(){
-                console.log('커지냐?');
+            function 커짐() {
+                console.log("커지냐?");
                 /********************
                     [ JS에서 클래스 제어하기 ]
                     classList 내장객체
@@ -169,19 +193,14 @@
                     3) toggle(클래스명) : 클래스넣기/빼기
                     -> toggle은 없으면 넣고 있으면 뺌!
                  ********************/
-                document
-                .getElementsByClassName('tv').item(0)
-                .classList.toggle('on');
+                document.getElementsByClassName("tv").item(0).classList.toggle("on");
 
                 //getElementsByClassName(클래스명)
                 //가져와 요소를 순번대로!!
                 //item(순번) - 클래스 중 순번(0부터)
-                document
-                .getElementsByClassName('tv').item(0)
-                .style.transition = '1.2s ease-in-out';
-            }; /////////// 커짐함수 ///////////
+                document.getElementsByClassName("tv").item(0).style.transition = "1.2s ease-in-out";
+            } /////////// 커짐함수 ///////////
             /////////////////////////////////
-
         </script>
     </body>
 </html>
