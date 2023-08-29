@@ -10,6 +10,7 @@
                 content: "";
                 display: none;
                 position: fixed;
+                z-index: 1;
                 top: 0;
                 left: 0;
                 width: 100vw;
@@ -34,6 +35,17 @@
                 line-height: 84px;
                 margin: 5px auto;
                 font-size: 24px;
+            }
+            /* 초이스 버튼 클래스 on */
+            .choice button.on {
+                position: relative;
+                z-index: -1;
+                border: 4px solid red;
+                border-radius: 10px;
+                background-color: navy;
+                color: #fff;
+                font-weight: bold;
+                transform: scale(1.2);
             }
         </style>
         <!-- 객체js 불러오기 -->
@@ -184,7 +196,7 @@
 
                 // -> 배열메서드는 중요하므로 별도로 훈련함!
                 /******************************************** 
-                            [ 객체(Object) 란? ]
+                    [ 객체(Object) 란? ]
 
                     - 일반적으로 JS에서 객체란 속성과 메서드를
                     가지는 프로그램 단위체
@@ -469,112 +481,123 @@
                 // 최초호출
                 showMovieInfo();
 
-
                 // 초이스버튼 링크걸기
 
                 // 대상선정 : .choice button
-                let choice = document.querySelectorAll('.choice button');
-                console.log('초이스버튼:',choice);
+                let choice = document.querySelectorAll(".choice button");
+                console.log("초이스버튼:", choice);
 
                 // 초이스개수
                 let choice_cnt = choice.length;
-                
+
                 // for문으로 버튼들을 click이벤트 설정함
                 // for(시;한;증){코드}
 
-                for(let i=0;i<choice_cnt;i++){
-                    choice[i].onclick = function(){
-                        //1. 버튼텍스트 
+                for (let i = 0; i < choice_cnt; i++) {
+                    choice[i].onclick = function () {
+                        // this -> 클릭된 버튼 자신!
+                        //1. 버튼텍스트
                         let btxt = this.innerText;
-                        console.log('난누구?',btxt);
+                        console.log("난누구?", btxt);
 
                         // 할당전 이전 영화객체
-                        console.log("이전 객체: ",zoe_obj);
+                        console.log("이전 객체: ", zoe_obj);
 
-                        // 2. 버튼텍스트에 해당하는 객체를 
+                        // 2. 버튼텍스트에 해당하는 객체를
                         // 기존객체에 덮어쓰기
-                        switch(btxt){
+                        switch (btxt) {
                             case "석호초이스":
-                            zoe_obj = tom_obj;
-                            break;
+                                zoe_obj = tom_obj;
+                                break;
                             case "동엽초이스":
-                            zoe_obj = nick_obj;
-                            break;
+                                zoe_obj = nick_obj;
+                                break;
                             case "용진초이스":
-                            zoe_obj = shin_Obj;
-                            break;
+                                zoe_obj = shin_Obj;
+                                break;
                             case "수진초이스":
-                            zoe_obj = csj_obj;
-                            break;
+                                zoe_obj = csj_obj;
+                                break;
                             case "혜경초이스":
-                            zoe_obj = hg_obj;
-                            break;
+                                zoe_obj = hg_obj;
+                                break;
                             case "서진초이스":
-                            zoe_obj = seo_obj;
-                            break;
+                                zoe_obj = seo_obj;
+                                break;
                             case "정현초이스":
-                            zoe_obj = jh_obj;
-                            break;
+                                zoe_obj = jh_obj;
+                                break;
                             case "민정초이스":
-                            zoe_obj = kmj_obj;
-                            break;
+                                zoe_obj = kmj_obj;
+                                break;
                             case "경은초이스":
-                            zoe_obj = lke_obj;
-                            break;
+                                zoe_obj = lke_obj;
+                                break;
                             case "주현초이스":
-                            zoe_obj = an_obj;
-                            break;
+                                zoe_obj = an_obj;
+                                break;
                             case "윤민초이스":
-                            zoe_obj = kimyoonmin_obj;
-                            break;
+                                zoe_obj = kimyoonmin_obj;
+                                break;
                             case "지민초이스":
-                            zoe_obj = cake_obj;
-                            break;
+                                zoe_obj = cake_obj;
+                                break;
                             case "승준초이스":
-                            zoe_obj = Moon_Obj;
-                            break;
+                                zoe_obj = Moon_Obj;
+                                break;
                             case "진구초이스":
-                            zoe_obj = tonyFilm;
-                            break;
+                                zoe_obj = tonyFilm;
+                                break;
                             case "승환초이스":
-                            zoe_obj = yu_obj;
-                            break;
+                                zoe_obj = yu_obj;
+                                break;
                             case "내우초이스":
-                            zoe_obj = naewoo_Obj;
-                            break;
+                                zoe_obj = naewoo_Obj;
+                                break;
+                            case "조은초이스":
+                                zoe_obj = zoe_world;
+                                break;
                         } //////// switch case //////////
 
                         // 할당후 영화객체
-                        console.log("이후 객체: ",tom_obj);
-
+                        console.log("이후 객체: ", tom_obj);
 
                         // 3. 객체 셋팅함수 호출
                         showMovieInfo();
-                        
+
+                        // 4. 모든 버튼 클래스 on 빼기
+                        choice.forEach(function (ele) {
+                            // ele-자신
+                            // forEach(function(자신,순번,전체)){}
+                            //console.log('forEach',a,b,c);
+                            ele.classList.remove("on");
+                        }); ///////// forEach /////////
+
+                        // 5. 클릭된 버튼에 클래스 on 주기
+                        this.classList.add("on");
                     }; ////// click 이벤트함수 ////////
-                    
                 } /////////// for ///////////////////
 
-
-
+                // 초이스 줄간격 조정
+                target[6].style.lineHeight = "20px";
             } /////// loadFn 함수 //////////////////////
             ////////////////////////////////////////////
 
-                /*************************************
+            /*************************************
                     함수명 : playMovie
                     기능 : 영화에고편 화면 띄우기
                 
                 *************************************/
-                function playMovie(mcode) {
-                    // mcode는 영화 id 코드
-                    // 함수호출 전달값 확인
-                    console.log("난진짜야", mcode);
+            function playMovie(mcode) {
+                // mcode는 영화 id 코드
+                // 함수호출 전달값 확인
+                console.log("난진짜야", mcode);
 
-                    // 1. 동영상 박스 대상선정 :#mvbox
-                    let mvbox = document.querySelector("#mvbox");
+                // 1. 동영상 박스 대상선정 :#mvbox
+                let mvbox = document.querySelector("#mvbox");
 
-                    // 2. 영화박스에 아이프레임 넣기
-                    mvbox.innerHTML = `
+                // 2. 영화박스에 아이프레임 넣기
+                mvbox.innerHTML = `
                     <div id="mv">
                         <!--유튜브 아이프레임-->
                         <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${mcode}?autoplay=1" allow="autoplay;"></iframe>
@@ -583,22 +606,22 @@
                     </div>
                     `;
 
-                    //3. 삽입된 동영상 박스 CSS 설정하기
-                    let mv = document.querySelector("#mv");
-                    let css = mv.style;
+                //3. 삽입된 동영상 박스 CSS 설정하기
+                let mv = document.querySelector("#mv");
+                let css = mv.style;
 
-                    css.position = "fixed";
-                    css.top = "50%";
-                    css.left = "50%";
-                    css.transform = "translate(-50%, -50%)";
-                    css.width = "700px";
-                    css.height = "450px";
-                    css.backgroundColor = "#000";
+                css.position = "fixed";
+                css.top = "50%";
+                css.left = "50%";
+                css.transform = "translate(-50%, -50%)";
+                css.width = "700px";
+                css.height = "450px";
+                css.backgroundColor = "#000";
 
-                    // 4. 닫기 버튼 CSS 설정하기
-                    let cbtn = document.querySelector(".cbtn");
-                    // style.cssText는 css를 직접 style속성값을 넣음!
-                    cbtn.style.cssText = `
+                // 4. 닫기 버튼 CSS 설정하기
+                let cbtn = document.querySelector(".cbtn");
+                // style.cssText는 css를 직접 style속성값을 넣음!
+                cbtn.style.cssText = `
                     position:absolute;
                     top: 0;
                     right: -70px;
@@ -613,24 +636,72 @@
                     cursor:pointer;
                     line-height: 50px;
                 `;
-                    // 아이프레임 보더 없앰
-                    mv.querySelector("iframe").style.border = "none";
+                // 아이프레임 보더 없앰
+                mv.querySelector("iframe").style.border = "none";
 
-                    // 5. 닫기 버튼 클릭시 #mv제거하기
-                    cbtn.onclick = function () {
-                        // remove()는 DOM메서드로 선택요소를 제거함!
-                        mv.remove();
+                // 5. 닫기 버튼 클릭시 #mv제거하기
+                cbtn.onclick = function () {
+                    // remove()는 DOM메서드로 선택요소를 제거함!
+                    mv.remove();
 
-                        // body에 클래스 on 제거하기
-                        document.body.classList.remove("on");
-                    }; /////// click이벤트 함수 ///////////
+                    // body에 클래스 on 제거하기
+                    document.body.classList.remove("on");
+                }; /////// click이벤트 함수 ///////////
 
-                    // 6. body 요소에 class on 주기
-                    // 동영상 배경 암전효과
-                    document.body.classList.add("on");
-                } ////////////// playMovie 함수 //////////////
-                /////////////////////////////////////////////
+                // 6. body 요소에 class on 주기
+                // 동영상 배경 암전효과
+                document.body.classList.add("on");
+            } ////////////// playMovie 함수 //////////////
+            /////////////////////////////////////////////
 
+            /********************************************** 
+            ※ 정리 :
+            ________________________________
+
+            배열값 설정
+            const 변수명 = [값1,값2,...];
+            또는
+            변수명[순번] = 값
+            _________________________________
+
+            배열값 호출
+            변수명[순번] -> 순번은 0부터
+            _________________________________
+
+            객체값 설정
+            const 변수명 = {속성:값,속성:값,...}
+            또는
+            변수명["속성명"] = 값
+            또는
+            변수명.속성명 = 값
+            ___________________________________
+
+            객체값 호출
+
+            변수명["속성명"]
+            -> 속성명을 따옴표로 싼 문자형임
+            (만약 변수형 속성명이어도 이렇게 부를땐
+            따옴표로 반드시 싸야한다!)
+
+            또는
+
+            변수명.속성명
+            -> 속성명이 반드시 변수형 이어야함!
+            -> 속성명이 문자형이어도 변수형에 적합하면 이와같이 사용가능
+
+            ____________________________________
+
+            참고) 내장객체를 new키워드 없이 바로 할당하는
+            방식을 리터럴방식이라고 부른다! 이 방식 추천함!
+            예) let str = ""
+                let arr = []
+                let obj = {}
+
+            비교) let str = new String();
+                  let arr = new Array();
+                  let obj = new Object();
+
+        **********************************************/
         </script>
     </head>
 
@@ -645,18 +716,19 @@
         <div class="cont"></div>
         <div class="cont choice">
             <!-- 영화초이스 버튼 박스 -->
+            <button class="on">조은초이스</button>
             <button>석호초이스</button>
             <button>동엽초이스</button>
             <button>용진초이스</button>
             <button>수진초이스</button>
             <button>혜경초이스</button>
-            <button>서진초이스</button><br>
+            <button>서진초이스</button><br />
             <button>정현초이스</button>
             <button>민정초이스</button>
             <button>경은초이스</button>
             <button>주현초이스</button>
             <button>윤민초이스</button>
-            <button>지민초이스</button><br>
+            <button>지민초이스</button><br />
             <button>승준초이스</button>
             <button>진구초이스</button>
             <button>승환초이스</button>
@@ -667,4 +739,3 @@
         <aside id="mvbox"></aside>
     </body>
 </html>
-;

@@ -1,5 +1,26 @@
 // 영화 초이스 객체 ///// object.js
 
+// 조은만의 오브젝트!
+let zoe_world = {};
+// 오브젝트 형만 만들고 객체내용은 아래에서!
+// 1. 영화제목
+zoe_world.title = "이터널 션샤인";
+// 2. 감독
+zoe_world.director = "미셸 공드리";
+// 3. 배우
+zoe_world.actor = "짐캐리, 케이트 윈슬렛";
+// 4. 장르
+zoe_world.genre = "로맨스";
+// 5. 관람가
+zoe_world.ratings = "12세";
+
+// 6. 예고편
+zoe_world.trailer = function () {
+    console.log("예고편:", "07-QBnEkgXU");
+    // 플레이어함수 호출!
+    playMovie("07-QBnEkgXU");
+}; ////// trailer 함수 ////////
+
 // 박석호만의 오브젝트!
 const tom_obj = {};
 // 오브젝트 형만 만들고 객체내용은 아래에서!
