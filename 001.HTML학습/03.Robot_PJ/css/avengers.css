@@ -16,8 +16,8 @@
     이유는 ios 에서 배경 fixed 속성을 미지원해서 가상요소로
     배경을 고정시킴
 */
-body:before{
-    content: '';
+body:before {
+    content: "";
     position: fixed;
     top: 0;
     left: 0;
@@ -26,24 +26,24 @@ body:before{
     z-index: -1;
     background: url(../ab_img/space.jpg) no-repeat center/cover;
 }
-html{
+html {
     /* rem 단위를 위한 root글자설정 */
     font-size: 10px;
 }
-body{
+body {
     color: #fff;
 }
 /* 공사중7 */
-body *{
+/* body * {
     outline: 2px dashed yellow;
-}
+} */
 /**************** 공통 클래스 ****************/
 /* 페이지 클래스 */
-.page{
+.page {
     position: relative;
     height: 100vh;
 }
-.tit{
+.tit {
     font-size: 4rem;
     text-align: center;
 }
@@ -51,31 +51,26 @@ body *{
 /************** 개별요소 디자인 **************/
 .avergers-box {
     position: absolute;
-    top: calc(50% - 400px/2);
-    left: calc(50% - 300px/2);
+    top: calc(50% - 400px / 2);
+    left: calc(50% - 300px / 2);
     width: 300px;
     height: 400px;
     background: url(../ab_img/ab0.jpg) no-repeat center/cover;
     border-radius: 50%;
     box-shadow: 
-    /* 바깥글로우 */
-    0 0 50px 10px cyan,
-    /* 내부글로우 */
-    inset 0 0 30px lightgreen;
+    /* 바깥글로우 */ 0 0 50px 10px cyan, /* 내부글로우 */ inset 0 0 30px lightgreen;
 }
 
 /* 캐릭터 공통 */
 .hero {
     position: absolute;
-    top: calc(50% - 150px/2);
-    left: calc(50% - 150px/2);
-    
+    top: calc(50% - 150px / 2);
+    left: calc(50% - 150px / 2);
     width: 150px;
     height: 150px;
-    
 }
 /* 어벤저스 이미지 */
-.hero img{
+.hero img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -90,4 +85,66 @@ body *{
             유사한 효과를 준다! 
     */
     border-radius: 50%;
+    box-shadow: 0 0 20px 10px lightgreen;
+}
+.txt {
+    position: absolute;
+    top: 50%;
+    transform: translateY(25%);
+    /* translateY(-50%); */
+    right: 110%;
+    width: 320px;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    background-color: rgb(255 255 255 / 46%);
+    border-radius: 15px;
+    text-shadow: 1px 1px 1px #000;
+
+    /* 숨기기 설정 */
+    height: 0;
+    overflow: hidden;
+
+    /* 트랜지션 */
+    transition: .4s ease-in-out;
+}
+
+/* 상위박스 .hero오버시 설명보이기 */
+.hero:hover .txt {
+    height: 220px;
+    transform: translateY(-50%);
+}
+
+/* 패딩과 보더는 하위박스에 주고 완전히 숨기기 */
+.txt > div{
+    padding: 2rem;
+}
+.txt.right{
+    right: auto;
+    left: 110%;
+}
+.txt h3{
+    font-size: 2.5rem;
+    text-align: center;
+    color: cyan;
+}
+/* .hero 순서별 위치값세팅 */
+.hero:nth-child(1){
+    /* 개별위치이동값 */
+    transform: translate(-170%, -100%);
+}
+.hero:nth-child(2){
+    /* 개별위치이동값 */
+    transform: translate(-170%, 100%);
+}
+.hero:nth-child(3){
+    /* 개별위치이동값 */
+    transform: translate(0%, 220%);
+}
+.hero:nth-child(4){
+    /* 개별위치이동값 */
+    transform: translate(170%, 100%);
+}
+.hero:nth-child(5){
+    /* 개별위치이동값 */
+    transform: translate(170%, -100%);
 }
