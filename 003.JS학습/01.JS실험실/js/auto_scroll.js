@@ -22,6 +22,8 @@ let pg_num = 0;
 let sts_wheel = 0;
 // 1-3. 전체페이지수 
 let total_pg;
+// 1-4. 전체 .page 요소
+let ele_page;
 
 // 새로고침시, 맨위로 이동시키기
 // 브라우저 스크롤위치캐싱 때문에 써줘야함
@@ -49,8 +51,11 @@ function loadFn(){
     // 호출확인
     console.log('로딩완료');
 
+    // .page요소 담기
+    ele_page = qsa('.page');
+
     // 전체페이지 수 할당 
-    total_pg = qsa('.page').length;
+    total_pg = ele_page.length;
     console.log('전체페이지수', total_pg);
 
 } ////// loadFn 함수 ////////////////
@@ -197,7 +202,7 @@ function movePage(dir){ // dir 은 방향값(1-아랬쪽, 0-윗쪽)
     
     // 3. 페이지 이동하기
     // offsetTop은 선택요소의 TOP위치값 리턴함!
-    window.scrollTo(0,qsa('.page')[pg_num].offsetTop);
-    console.log('여기야!',qsa('.page')[pg_num].offsetTop);
+    window.scrollTo(0,ele_page[pg_num].offsetTop);
+    console.log('여기야!',ele_page[pg_num].offsetTop);
 
 } /////////// movePage 함수 //////////
