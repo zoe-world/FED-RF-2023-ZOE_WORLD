@@ -4,6 +4,10 @@
 const qs = (x) => document.querySelector(x);
 const qsa = (x) => document.querySelectorAll(x);
 
+// 새로고침시 맨위로 이동
+setTimeout(() => {window.scrollTo(0,0)}, 500);
+
+
 window.addEventListener('wheel', (e)=>{
     //기본기능 막기:
     e.preventDefault();
@@ -15,6 +19,16 @@ window.addEventListener('wheel', (e)=>{
     //window.innerHeight*(e.wheelDelta<0?1:0)
     // --> 풀이 : 윈도우높이값*e.wheelDelta 값이 음수면 1을 곱하고, 양수면 0을 곱해라!
     // 아랫방향은 윈도우 높이값*1만큼 가고 윗방향은 윈도우높이값*0 만큼 가라(즉 0곱하면0이기 때문에, 위로 올라가라)
+
+    // 두번째 페이지 일때, 동영상 플레이하기
+    if(e.wheelDelta<0){ 
+        // 아래로 내려갈때
+        qs('.trailer-box iframe').src = 'https://www.youtube.com/embed/Ko2NWhXI9e8?autoplay=1'
+    } //////////// if ////////
+    else{ ////////////else ////////
+        // 위로 올라올때 - 멈춤
+        qs('.trailer-box iframe').src='https://www.youtube.com/embed/Ko2NWhXI9e8'
+    }
 },{passive:false})
 // passive:false 설정값 변경을 해야 
 // window, document, body 이 세가지 중요객체에 대하여 막기설정을 할 수 있음
