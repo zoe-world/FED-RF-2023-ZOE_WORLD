@@ -5,6 +5,8 @@
 
 /************* 1. 상단영역 *************/
 #header {
+    position: relative;
+    z-index: 999;
     /* background-color: lightblue; */
 }
 .header .partbox {
@@ -70,4 +72,38 @@
 }
 .footer .partbox {
     height: 100px;
+}
+.smenu {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    background-color: #fff;
+    overflow: hidden;
+    height: 0;
+    transition: .4s ease-in-out;
+}
+
+aside.smbx {
+    max-width: 1000px;
+    margin: 0 auto;
+    outline: 4px dashed green;
+}
+
+.smbx h2 {
+    font-size: 3.2rem;
+}
+
+.smbx ol {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px 0;
+    font-size: 1.6rem;
+    line-height: 3;
+}
+.smbx ol li{
+    flex-basis: 25%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: middle;
 }
