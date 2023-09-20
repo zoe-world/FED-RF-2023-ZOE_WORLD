@@ -1,76 +1,90 @@
 // 도꺠비 PJ 메인 JS - main.js
 
-// DOM 함수 객체 ///////////
-const domFn = {
-  // 요소선택함수 ////////
-  qs: (x) => document.querySelector(x),
-  // 중간쿼리선택자를 하나 더 만듬
-  qsEl: (el, x) => el.querySelector(x),
-  qsa: (x) => document.querySelectorAll(x),
-  // 중간쿼리 전체선택자를 하나 더 만듬
-  qsaEl: (el, x) => el.querySelectorAll(x),
+// 모듈 불러오기 ////////
+import dFn from "./dom.js";
+// 부드러운 스크롤 모듈
+import {
+  startSS,
+  setPos
+} from "./smoothScroll23.js";
+// 데이터 모듈
+import {
+  gridData,
+  gnbData
+} from "./data_drama.js";
 
-  // 이벤트셋팅함수
-  addEvt: (ele, evt, fn) => ele.addEventListener(evt, fn),
-}; ///////// domFn 객체 ///////////
+console.log(gridData, gnbData);
+// 부드러운 스크롤 적용
+startSS();
 
-// 로딩구역 호출설정
-window.addEventListener("DOMContentLoaded", loadFn);
+// 0. 새로고치면 스크롤바 위치캐싱후 맨위로 이동
+setTimeout(() => {
+  // 윈도우 스크롤 맨위로!
+  window.scrollTo(0, 0);
+  // 부드러운 스크롤 위치값 반영!
+  setPos(0);
+  // 안하면 원래 위치로 스크롤시 튐!
+}, 400);
+// 0. 스크롤바 트랙을 잡고 위치이동시 위치값 반영
+dFn.addEvt(window, "mouseup", () => setPos(window.scrollY));
+//////// mouseup /////////////
 
-///// 로딩구역 함수 /////////////
-function loadFn() {
-  // 호출확인
-  console.log("로딩확인");
+// 0. 키보드 방향키 이동시 위치값 반영
+dFn.addEvt(window, "keyup", () => setPos(window.scrollY));
+//////// mouseup /////////////
 
-  // 부드러운 스크롤 적용
-  startSS();
+// 부드러운 스크롤 떄문에 마우스휠 이벤트 막기가
+// 작동되어 캐릭터 설명박스 작은 스크롤도 작동안됨!
+// 따라서 이벤트 버블링을 막아줘야함!!
+// event.stopPropagation() 그만전파하지마
+// 이벤트 객체의 이벤트 버블링 막아주는 메서드임!
 
-  // 부드러운 스크롤 떄문에 마우스휠 이벤트 막기가
-  // 작동되어 캐릭터 설명박스 작은 스크롤도 작동안됨!
-  // 따라서 이벤트 버블링을 막아줘야함!!
-  // event.stopPropagation() 그만전파하지마
-  // 이벤트 객체의 이벤트 버블링 막아주는 메서드임!
+// 대상 : .desc-box
+let desc_box = document.querySelectorAll(".desc-box");
+console.log(desc_box);
+// 모든 캐릭터 설명박스는 이벤트 버블링 막기!
+// -> 여기서 마우스휠 됨!
+desc_box.forEach((ele) => {
+  // ele 요소자신
+  ele.onwheel = (e) => e.stopPropagation();
+});
 
-  // 대상 : .desc-box
-  let desc_box = document.querySelectorAll(".desc-box");
-  console.log(desc_box);
-  // 모든 캐릭터 설명박스는 이벤트 버블링 막기!
-  // -> 여기서 마우스휠 됨!
-  desc_box.forEach((ele) => {
-    // ele 요소자신
-    ele.onwheel = (e) => e.stopPropagation();
-  });
-
-  /******************************************************** 
-    [ 현장포토파트 데이터 구성하기 ]
+/******************************************************** 
+    [ 그리드박스 공통파트 데이터 구성하기 ]
     -배열데이터를 이용하여 HTML코드 구성
 *******************************************************/
-  // 1. 대상선정: .live-box
-  const liveBox = domFn.qs(".live-box");
-  console.log("대상:", liveBox);
+// 1. 대상선정: .grid-box (.live-box/.poster-box)
+const gridBox = dFn.qsa(".grid-box");
+console.log("대상:", gridBox);
 
-  // 2. 현장포토 데이터를 기반으로 HTML 코드 만들기
+// 2. 대상 코드넣기 함수 호출설정하기
+gridBox.forEach((ele, idx) => makeGrid(ele, idx));
+
+// 2. 그리드 스타일 데이터 생성하기 함수
+function makeGrid(ele, idx) {
+  // ele-대상요소
+  // 1. 현장포토 데이터를 기반으로 HTML 코드 만들기
   let hcode = "<ul>";
 
   // 반복코드 만들기///
   // 현장포토 데이터 data_drama.js 에서 가져옴
-  liveData.forEach((val) => {
+  gridData[idx].forEach((val) => {
     // html 변수에 속성넣기
+    // 폴더경로는 idx 가 0(false)이면 "live_photo"
+    //  1(true)이면 "poster_img"로 셋팅함
     hcode += `<li>
-        <figure>
-            <img src="./images/live_photo/${val.imgName}.jpg" alt="${val.title}">
-            <figcaption>${val.title}</figcaption>
-        </figure>
-    </li>`;
+          <figure>
+              <img src="./images/${idx ? "poster_img" : "live_photo"}/${val.imgName}.jpg" alt="${val.title}">
+              <figcaption>${val.title}</figcaption>
+          </figure>
+      </li>`;
   }); /////// forEach ///////////
   hcode += "</ul>";
 
   console.log(hcode);
-
-  // 3. 대상박스에 html 코드 넣기
-  liveBox.innerHTML = hcode;
-} ///////// loadFn 함수 ////////////
-///////////////////////////////////
+  // 2. 대상박스에 html 코드 넣기
+  ele.innerHTML = hcode;
+} ///////// makeGrid 함수 //////////
 
 // [GNB 서브메뉴 셋팅하기]
 // 구조: div.smenu > aside>.smbx > h2{1차메뉴}+(ul>li>a{2차메뉴})
@@ -79,13 +93,13 @@ function loadFn() {
 // 서브메뉴 넣을 li는 하위 a요소의 텍스트가 gnbData 속성명 1차 메뉴와
 // 일치하는 경우 하위메뉴를 넣어준다
 
-const gnbList = domFn.qsa(".gnb>ul>li");
+const gnbList = dFn.qsa(".gnb>ul>li");
 console.log("메뉴:", gnbList, "/데이터:", gnbData);
 
 // 2. 대상에 하위메뉴 태그 만들기
 gnbList.forEach((ele) => {
   // 하위 a요소 텍스트 읽기
-  let atxt = domFn.qsEl(ele, "a").innerText;
+  let atxt = dFn.qsEl(ele, "a").innerText;
 
   // 2. GNB 데이터 읽기
   let gData = gnbData[atxt];
@@ -103,11 +117,15 @@ gnbList.forEach((ele) => {
         <aside class="smbx">
           <h2>${atxt}</h2>
           <ol>
-            ${gData.map((val) => 
-              `<li>
+            ${gData
+              .map(
+                (val) =>
+                  `<li>
                 <a href="#">${val}</a>
                 </li>
-            `).join('')}
+            `
+              )
+              .join("")}
               
           </ol>
         </aside>
@@ -118,30 +136,29 @@ gnbList.forEach((ele) => {
 }); ////////// forEach ////////
 
 // 1. 대상선정
-const gnb = domFn.qsa('.gnb>ul>li');
+const gnb = dFn.qsa(".gnb>ul>li");
 
 // 2. 이벤트 설정하기
-gnb.forEach(ele=>{
-  if(domFn.qsEl(ele,'.smenu')){
-
+gnb.forEach((ele) => {
+  if (dFn.qsEl(ele, ".smenu")) {
     // 서브메뉴가 있는 경우에
     // if문에서 undefined/null은 false처리됨
-    domFn.addEvt(ele,'mouseover',overFn);
-    domFn.addEvt(ele,'mouseout',outFn);
+    dFn.addEvt(ele, "mouseover", overFn);
+    dFn.addEvt(ele, "mouseout", outFn);
   }
 });
 
 // 3. 함수만들기
-function overFn(){
-    console.log('아웃',this);
-    // 하위 .smbx 높이값 알아오기
-    let hv = domFn.qsEl(this,".smbx").clientHeight;
-    console.log('높이',hv);
-    // 2. 하위 서브메뉴박스만큼 .smenu 높이값 주기
-    domFn.qsEl(this,".smenu").style.height = hv + 'px';
+function overFn() {
+  console.log("아웃", this);
+  // 하위 .smbx 높이값 알아오기
+  let hv = dFn.qsEl(this, ".smbx").clientHeight;
+  console.log("높이", hv);
+  // 2. 하위 서브메뉴박스만큼 .smenu 높이값 주기
+  dFn.qsEl(this, ".smenu").style.height = hv + "px";
 } ////////// overFn /////////
-function outFn(){
-    console.log('오버',this);
-    // 서브메뉴 박스 높이값 0만들기
-    domFn.qsEl(this,".smenu").style.height = '0px';
+function outFn() {
+  console.log("오버", this);
+  // 서브메뉴 박스 높이값 0만들기
+  dFn.qsEl(this, ".smenu").style.height = "0px";
 } ////////// overFn /////////
