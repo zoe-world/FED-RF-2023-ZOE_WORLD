@@ -10,7 +10,8 @@ import {
 // 데이터 모듈
 import {
   gridData,
-  gnbData
+  gnbData,
+  previewData
 } from "./data_drama.js";
 
 console.log(gridData, gnbData);
@@ -74,7 +75,9 @@ function makeGrid(ele, idx) {
     //  1(true)이면 "poster_img"로 셋팅함
     hcode += `<li>
           <figure>
-              <img src="./images/${idx ? "poster_img" : "live_photo"}/${val.imgName}.jpg" alt="${val.title}">
+              <img src="./images/${idx ? "poster_img" : "live_photo"}/${
+      val.imgName
+    }.jpg" alt="${val.title}">
               <figcaption>${val.title}</figcaption>
           </figure>
       </li>`;
@@ -162,3 +165,63 @@ function outFn() {
   // 서브메뉴 박스 높이값 0만들기
   dFn.qsEl(this, ".smenu").style.height = "0px";
 } ////////// overFn /////////
+
+////////////////////////////////////////
+///// 인트로 동영상 클릭시 플레이하기
+// 대상: .intro-mv-img
+// 이벤트 : click
+// -> 가상요소 플레이버튼 클릭시
+// 이벤트 버블링으로 본 박스가 반응함!
+
+// 1. 대상선정
+const mvBox = dFn.qs(".intro-mv-img");
+
+// 2.  이벤트 설정하기
+dFn.addEvt(mvBox, "click", showMv);
+
+// 클릭이벤트 연결상태변수
+let stsShowMv = 0;
+
+// 3. 함수만들기
+function showMv() {
+  if (stsShowMv) return;
+  stsShowMv = 1;
+  console.log("보여줘");
+  // 동영상넣기
+  // 대상 : 나 자신
+  this.innerHTML = `
+    <video src='./images/intro_mv.mp4' controls autoplay></video>
+  `;
+  // 가상요소 플레이버튼 지우기
+  this.classList.remove("off");
+} /////////// showMv 함수 ////////////
+
+/////////////////////////////////////////////////
+// 오름차순 데이터를 내림차순으로 변경하여 화면에 뿌리기!
+
+// 1. 데이터정렬 변경하기
+let preNewData = previewData.sort((x, y) => {
+  // x,y는 배열값 앞뒤를 계속 가지고 들어옴
+  // 배열값 중 idx속성값을 가져와서 숫자형변환 후 사용
+  let a = Number(x.idx);
+  let b = Number(y.idx);
+
+  // 배열순서변경 메서드인 sort() 내부에 return값을
+  // 사용하여 순서를 변경한 새로운 배열을 만들어준다!
+  return a == b ? 0 : (a > b ? -1 : 1);
+  // 비?집:(눈?집:놀이동산)
+});
+console.log(preNewData);
+
+// 2. 대상선정: .preview-box>div
+const preBox = dFn.qsa('.preview-box>div');
+console.log(preBox);
+
+// 3. 대상을 순회하여 태그넣기
+// 데이터: 역순정렬을 한 미리보기 데이터넣기
+preBox.forEach((ele,idx)=>{
+  ele.innerHTML = `
+    <h3>${preNewData[idx].title}</h3>
+    <p>${preNewData[idx].story}</p>
+  `;
+})
