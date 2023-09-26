@@ -3,18 +3,11 @@
 // 모듈 불러오기 ////////
 import dFn from "./dom.js";
 // 부드러운 스크롤 모듈
-import {
-  startSS,
-  setPos
-} from "./smoothScroll23.js";
+import { startSS, setPos } from "./smoothScroll23.js";
 // 데이터 모듈
-import {
-  gridData,
-  gnbData,
-  previewData
-} from "./data_drama.js";
+import { gridData, gnbData, previewData, clipData } from "./data_drama.js";
 
-console.log(gridData, gnbData);
+// console.log(gridData, gnbData);
 // 부드러운 스크롤 적용
 startSS();
 
@@ -42,7 +35,7 @@ dFn.addEvt(window, "keyup", () => setPos(window.scrollY));
 
 // 대상 : .desc-box
 let desc_box = document.querySelectorAll(".desc-box");
-console.log(desc_box);
+// console.log(desc_box);
 // 모든 캐릭터 설명박스는 이벤트 버블링 막기!
 // -> 여기서 마우스휠 됨!
 desc_box.forEach((ele) => {
@@ -56,7 +49,7 @@ desc_box.forEach((ele) => {
 *******************************************************/
 // 1. 대상선정: .grid-box (.live-box/.poster-box)
 const gridBox = dFn.qsa(".grid-box");
-console.log("대상:", gridBox);
+// console.log("대상:", gridBox);
 
 // 2. 대상 코드넣기 함수 호출설정하기
 gridBox.forEach((ele, idx) => makeGrid(ele, idx));
@@ -84,7 +77,7 @@ function makeGrid(ele, idx) {
   }); /////// forEach ///////////
   hcode += "</ul>";
 
-  console.log(hcode);
+  // console.log(hcode);
   // 2. 대상박스에 html 코드 넣기
   ele.innerHTML = hcode;
 } ///////// makeGrid 함수 //////////
@@ -97,7 +90,7 @@ function makeGrid(ele, idx) {
 // 일치하는 경우 하위메뉴를 넣어준다
 
 const gnbList = dFn.qsa(".gnb>ul>li");
-console.log("메뉴:", gnbList, "/데이터:", gnbData);
+// console.log("메뉴:", gnbList, "/데이터:", gnbData);
 
 // 2. 대상에 하위메뉴 태그 만들기
 gnbList.forEach((ele) => {
@@ -106,14 +99,14 @@ gnbList.forEach((ele) => {
 
   // 2. GNB 데이터 읽기
   let gData = gnbData[atxt];
-  // console.log('텍스트:',atxt,gData);
+  //console.log('텍스트:',atxt,gData);
 
   // 3. 해당 서브 데이터가 있을 경우 태그 만들어넣기
   // Array.isArray(gData)로 배열여부를 확인함!
   // 배열값은 태그를 만들어 그 자리에 출력: 배열.map().join('');
   if (gData) {
     // 데이터가 없으면 undefined => false처리
-    console.log("만들어!", atxt);
+    // console.log("만들어!", atxt);
     ele.innerHTML += `
       
       <div class="smenu">
@@ -153,15 +146,15 @@ gnb.forEach((ele) => {
 
 // 3. 함수만들기
 function overFn() {
-  console.log("아웃", this);
+  // console.log("아웃", this);
   // 하위 .smbx 높이값 알아오기
   let hv = dFn.qsEl(this, ".smbx").clientHeight;
-  console.log("높이", hv);
+  // console.log("높이", hv);
   // 2. 하위 서브메뉴박스만큼 .smenu 높이값 주기
   dFn.qsEl(this, ".smenu").style.height = hv + "px";
 } ////////// overFn /////////
 function outFn() {
-  console.log("오버", this);
+  // console.log("오버", this);
   // 서브메뉴 박스 높이값 0만들기
   dFn.qsEl(this, ".smenu").style.height = "0px";
 } ////////// overFn /////////
@@ -186,7 +179,7 @@ let stsShowMv = 0;
 function showMv() {
   if (stsShowMv) return;
   stsShowMv = 1;
-  console.log("보여줘");
+  // console.log("보여줘");
   // 동영상넣기
   // 대상 : 나 자신
   this.innerHTML = `
@@ -208,20 +201,46 @@ let preNewData = previewData.sort((x, y) => {
 
   // 배열순서변경 메서드인 sort() 내부에 return값을
   // 사용하여 순서를 변경한 새로운 배열을 만들어준다!
-  return a == b ? 0 : (a > b ? -1 : 1);
+  return a == b ? 0 : a > b ? -1 : 1;
   // 비?집:(눈?집:놀이동산)
 });
-console.log(preNewData);
+// console.log(preNewData);
 
 // 2. 대상선정: .preview-box>div
-const preBox = dFn.qsa('.preview-box>div');
-console.log(preBox);
+const preBox = dFn.qsa(".preview-box>div");
+// console.log(preBox);
 
 // 3. 대상을 순회하여 태그넣기
 // 데이터: 역순정렬을 한 미리보기 데이터넣기
-preBox.forEach((ele,idx)=>{
+preBox.forEach((ele, idx) => {
   ele.innerHTML = `
     <h3>${preNewData[idx].title}</h3>
     <p>${preNewData[idx].story}</p>
   `;
-})
+});
+
+//////////////////////////////////////////////
+/// 최신 동영상 영역 데이터 뿌리기/////////
+// 대상 : .clip-box
+const clipBox = dFn.qs(".clip-box");
+console.log(clipBox);
+
+// 생성할 데이터
+let clipCode = "";
+
+// 데이터 매칭하여 태그만들기
+// 배열데이터 이므로 forEach 사용!!
+clipData.forEach((val) => {
+  clipCode += `
+    <li>
+    <iframe src="https://www.youtube.com/embed/${val.mvid}"></iframe>
+    <h4>${val.subtit}</h4>
+    <h3>${val.title}</h3>
+    </li>
+  `;
+}); ////////// forEach //////////////
+
+// 코드넣기
+clipBox.innerHTML = `<ul>${clipCode}</ul>`;
+
+
