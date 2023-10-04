@@ -15,7 +15,8 @@
 // 생성자 함수를 만들어서 사용한다.
 // 대문자로 시작하는 이름을 사용한다
 function MyFirstReact() {
-  return (
+  // return (  시작소괄호는 반드시 return문 뒤에 쓸것 
+  return ( 
     <div>
       <h1>잘해보자!</h1>
       <h2>
