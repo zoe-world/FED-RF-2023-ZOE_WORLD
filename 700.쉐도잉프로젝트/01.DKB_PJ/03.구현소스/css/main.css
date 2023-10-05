@@ -7,12 +7,12 @@
 @import url(./common.css);
 
 /* 공사중표시 */
-body * {
+/* body * {
     outline: 2px dashed #ccc;
-}
-body > div > * {
+} */
+/* body > div > * {
     outline-color: red;
-}
+} */
 
 
 /* 개별영역 박스 -> 확장형 박스
@@ -53,7 +53,7 @@ body > div > * {
     width: calc(95%/4);
     /* 개별박스 비율설정 : height설정안함! */
     aspect-ratio: 2/1.2;
-    outline: 2px dashed blue;
+    /* outline: 2px dashed blue; */
 }
 /* 캐릭터 컨텐츠박스 */
 .cat-content{
@@ -351,9 +351,10 @@ body > div > * {
 }
 .clip-box ul {
     position: relative;
-    left: 0;
+    left: 0;/* 이동초기값 */
     display: flex;
     gap: 0 2%;
+    /* 트랜지션 */
     transition: left .4s ease-in-out;
 }
 
@@ -414,11 +415,13 @@ body > div > * {
     color: #fff;
     border: none;
     background-color: rgba(0, 0, 0, 0.6); 
+    cursor: pointer;
 }
 /* 왼쪽버튼 */
 .btn-box button:first-child{
-    display: none;
     left: -35px;
+    /* 처음에 안보임 */
+    display: none;
 }
 /* 오른쪽버튼 */
 .btn-box button:last-child{
