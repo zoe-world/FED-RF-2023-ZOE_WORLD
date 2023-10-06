@@ -107,9 +107,9 @@ const showNum = dFn.qs(".showNum");
 // (2) 배열 숫자 데이터만큼 이미지로 변환하여 출력
 // map().join() 맵쬬잉!
 const showScreen = () =>
-showNum.innerHTML = arrNumber
-  .map((val) => `<img src="./images/num/num_0${val}.png" alt="숫자이미지">`)
-  .join("");
+  (showNum.innerHTML = arrNumber
+    .map((val) => `<img src="./images/num/num_0${val}.png" alt="숫자이미지">`)
+    .join(""));
 
 // 최초출력
 showScreen();
@@ -124,23 +124,23 @@ dFn.addEvt(selBox, "change", function () {
   let optVal = this.value;
   console.log("숫자정렬변경:", optVal);
   // 2. 정렬 분기 : 1-오름차순 / 2-내림차순
-  if(optVal==1){ // 오름차순
+  if (optVal == 1) {
+    // 오름차순
     // [sort()메서드 내부함수사용법]
     // a > b 일떄 true이면 1처리(순서를 바꾼다는 소리)
-    arrNumber.sort((a,b)=>a==b?0:a>b?1:-1);
+    arrNumber.sort((a, b) => (a == b ? 0 : a > b ? 1 : -1));
 
     // sort() 빼기 연산처리 : 앞수 - 뒷수
     // arrNumber.sort((a,b)=>a-b);
-
-} ////// if ///
-else if(optVal==2){ // 내림차순
+  } ////// if ///
+  else if (optVal == 2) {
+    // 내림차순
     // [sort()메서드 내부함수사용법]
     // a > b 일떄 true이면 1처리(순서를 안 바꾼다는 소리)
-    arrNumber.sort((a,b)=>a==b?0:a>b?-1:1);
+    arrNumber.sort((a, b) => (a == b ? 0 : a > b ? -1 : 1));
 
     // sort() 빼기 연산처리 : 뒷수 - 앞수
     // arrNumber.sort((a,b)=>b-a);
-
   } ///// else if ///
 
   // 화면출력 >> 원봄 배열에 정렬이 변경된 후 다시 출력
@@ -156,9 +156,7 @@ const showNum2 = dFn.qs(".showNum2");
 // (2) 배열 숫자 데이터만큼 이미지로 변환하여 출력
 // map().join() 맵쬬잉!
 const showScreen2 = () =>
-showNum2.innerHTML = arrString
-  .map((val) => `<span>${val}</span>`)
-  .join("");
+  (showNum2.innerHTML = arrString.map((val) => `<span>${val}</span>`).join(""));
 
 // 최초출력
 showScreen2();
@@ -173,26 +171,136 @@ dFn.addEvt(selBox2, "change", function () {
   let optVal = this.value;
   console.log("숫자정렬변경:", optVal);
   // 2. 정렬 분기 : 1-오름차순 / 2-내림차순
-  if(optVal==1){ // 오름차순
+  if (optVal == 1) {
+    // 오름차순
     // [sort()메서드 내부함수사용법]
     // a > b 일떄 true이면 1처리(순서를 바꾼다는 소리)
-    arrString.sort((a,b)=>a==b?0:a>b?1:-1);
+    arrString.sort((a, b) => (a == b ? 0 : a > b ? 1 : -1));
 
     // 오름차순 기본 메서드 sort() 사용
     // arrString.sort();
-    
-} ////// if ///
-else if(optVal==2){ // 내림차순
+  } ////// if ///
+  else if (optVal == 2) {
+    // 내림차순
 
     // [sort()메서드 내부함수사용법]
     // a > b 일떄 true이면 -1처리(순서를 안 바꾼다는 소리)
-    arrString.sort((a,b)=>a==b?0:a>b?-1:1);
+    arrString.sort((a, b) => (a == b ? 0 : a > b ? -1 : 1));
 
     // 내림차순 기본 메서드 reverse() 사용
     // arrString.reverse();
-
   } ///// else if ///
 
   // 화면출력 >> 원봄 배열에 정렬이 변경된 후 다시 출력
   showScreen2();
 }); /////// change 이벤트 함수 ///////////
+
+//////////////////////////////////////////////
+// 3. 객체 데이터 배열의 정렬 ////////////
+////////////////////////////////////////////
+// (1). 데이터
+const list1 = [
+  {
+    idx: 8,
+    tit: "나는 누구?",
+    cont: "공동구매) 슬로건 공구 (계좌와 네이버폼)",
+  },
+  {
+    idx: 4,
+    tit: "여기는 어디?",
+    cont: "총공 공지] 오늘부터 일 2회, 총공 진행합니다",
+  },
+  {
+    idx: 1,
+    tit: "나야나",
+    cont: "연합 갈라 서포트 계좌오픈",
+  },
+  {
+    idx: 15,
+    tit: "이제 얼마나 남은거니?",
+    cont: "음악프로그램에 출연 요청글도 써볼까요?",
+  },
+]; /////////////// list1 /////////////
+
+console.log(list1);
+
+// 출력대상: .showList3
+// (3). 요소에 데이터 코드 넣기
+const showList3 = dFn.qs(".showList3");
+
+// (2). html 코드 생성하여 출력하는 함수 만들기
+const upCode = () => {
+  // 반복코드 만들기
+  // 대상코드: list1 배열
+  let hcode = list1.map(
+    (val) =>
+      `
+    <tr>
+      <td>${val.idx}</td>
+      <td>${val.tit}</td>
+      <td>${val.cont}</td>
+    </tr>
+    `
+  );
+  // console.log(hcode);
+  // 기본 테이블 모양 잡기
+  showList3.innerHTML = `
+  <table>
+    <thead>
+      <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>내용</th>
+      </tr>
+    </thead>
+    <tbody>
+    ${hcode.join("")}
+    </tbody>
+  </table>`;
+}; ///////////// upCode 함수 ////////////////////
+// (3) 요소에 데이터 코드 넣기 함수호출 : 기본출력
+upCode();
+
+// (4) 정렬변경 이벤트 발생시 실제 정렬 변경하기 ///
+// 이벤트 대상: .sel3
+const sel3 = dFn.qs(".sel3");
+// 정렬기준 대상 : .cta3
+const cta3 = dFn.qs(".cta3");
+
+dFn.addEvt(sel3, "change", sortingFn);
+
+// 정렬변경 함수 만들기 ///
+function sortingFn() {
+  // 1. 선택값 담기
+  let optVal = this.value;
+  
+  // 2. 정렬기준값 읽기
+  let cta = cta3.value;
+  console.log("바꿔 정렬", optVal, cta);
+
+  // 2. 분기하기
+  if (optVal == 1) {
+    // 오름차순
+    list1.sort((a, b) => {
+      // a,b는 모두 객체 데이터
+      // 따라서 내부 속성을 구체적으로 비교를 해야됨
+      // idx, tit, cont 세가지 중 하나로 비교
+      return a[cta] == b[cta] ? 0 : a[cta] > b[cta] ? 1 : -1;
+    });
+  } /////////// if ////
+  else if (optVal == 2) {
+    // 내림차순
+    
+    // 오름차순
+    list1.sort((a, b) => {
+      // a,b는 모두 객체 데이터
+      // 따라서 내부 속성을 구체적으로 비교를 해야됨
+      // idx, tit, cont 세가지 중 하나로 비교
+      return a[cta] == b[cta] ? 0 : a[cta] > b[cta] ? -1 : 1;
+    });
+  } /////// else if ///////
+  console.log(list1);
+
+  // 리스트 코드 반영하기
+  upCode();
+} //////////// sortingFn /////
