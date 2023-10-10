@@ -65,7 +65,24 @@
     *************************************************/
 	
 	
-			
+			$(()=>{
+        
+        // h2요소를 클릭하면 
+        $('header h2').click(()=>{
+          $('h2').css({backgroundColor:"yellow"});
+        }) ////// click //////////
+        $('nav').click((e)=>{
+          let this2 = $(e.target);
+          console.log(this2)
+          $(this).css({
+            backgroundColor:'green',
+            border:"2px solid red",
+            fontSize:'40px',
+            color:'blue',
+            transition:'.5s ease-in-out'
+          })
+        })
+      }) /////////// jQB //////////////////////
 	
 	</script>
 	
