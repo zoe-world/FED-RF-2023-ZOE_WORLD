@@ -120,7 +120,7 @@ function EventShow() {
     ReactDOM.render(
       <MakeImg
         idnm="car"
-        isrc="https://www.pngplay.com/wp-content/uploads/13/Ferrari-458-Transparent-PNG.png"
+        isrc="./images/ferrari.png"
         ialt="페라리레드"
         tit="클릭하면 시운전해요!"
         info="true"
