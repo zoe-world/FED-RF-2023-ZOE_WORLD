@@ -143,6 +143,36 @@ import dFn from "./dom.js";
 
       *************************************************
 
+[ 객체를 배열로 변환하여 리스트 만들기 : 정렬시 필수! ]
+
+  1. 대상: 배열이 아닌 객체형식으로 되어 있는 데이터를
+    리스트로 만들고 이를 배열정렬 메서드를 사용코자할때
+  
+  2. 변경방법:
+      (1) 객체의 속성(키)만 배열로 만들어준다!
+      Object 객체는 객체를 위한 인터페이스 제공 객체임!
+      -> Object.keys(객체)
+      : 하는일 - 객체의 속성을 모아 배열로 만들어준다!
+      -> 키배열을 만드는 이유는?
+      ->>> 키배열 === 값배열 왜????
+      -> 객체는 키를 통해 값을 부를 수 있기 때문이다!
+
+      (2) 변경확인 
+          변경전 : {속성1:값1,속성2:값2}
+          변경후 : [속성1,속성2]
+
+      (3) 속성을 값으로 하는 배열값으로 정렬을 변경할 수 있다
+      -> Object.keys(객체).sort()
+
+      (4) 객체값으로 구성되는 배열일 경우 아래와 같이 변환한다
+      -> 객체를 변환후 map으로 값을 다시 담아준다!
+      객체변수 = 객체
+
+      [ 한번에 값배열로 변환 : 오브젝트.키쓰.맵! ]
+      새변수 = Object.keys(객체변수).map(v=>객체변수[v])
+
+  3. 새로구성한 객체 변환 배열로 기존 배열 메서드를 사용하여
+      정렬, 검색 후 정렬 등을 수행한다!!
 
 ******************************************************/
 
@@ -291,14 +321,14 @@ const list1 = [
   },
 ]; /////////////// list1 /////////////
 
-console.log(list1);
+// console.log(list1);
 
 // 출력대상: .showList3
 const showList3 = dFn.qs(".showList3");
 
 // (2) html 코드 생성하여 출력하는 함수 만들기
 // upCode 함수를 공통으로 파라미터 처리함 /////
-const upCode = (data,exBox) => {
+const upCode = (data, exBox) => {
   // data - 객체데이터배열 / exBox - 출력할요소
   // 반복코드 만들기
   // 대상코드 : list1 배열
@@ -331,7 +361,7 @@ const upCode = (data,exBox) => {
 }; //////////// upCode 함수 //////////////
 
 // (3) 요소에 데이터 코드 넣기 함수호출 : 기본출력
-upCode(list1,showList3);
+upCode(list1, showList3);
 
 // (4) 정렬변경 이벤트 발생시 실제 정렬 변경하기 ///
 // 이벤트 대상: .sel3
@@ -341,11 +371,16 @@ const cta3 = dFn.qs(".cta3");
 
 // sel3 이벤트 설정하기 ////
 // 데이터와 출력 타겟부터 설정후 정렬함수 호출!
-dFn.addEvt(sel3, "change", ()=>{
+dFn.addEvt(sel3, "change", () => {
   targetData = list1;
   targetEle = showList3;
 }); /////// change ///////////
 dFn.addEvt(sel3, "change", sortingFn);
+
+// 검색기준 선택박스 변경시 정렬선택 초기화하기
+dFn.addEvt(dFn.qs(".cta3"), "change", () => {
+  dFn.qs(".sel3").value = "0";
+}); //////////// change /////////////
 
 // 정렬변경함수의 데이터 및 출력요소 셋팅변수
 let targetData = list1;
@@ -356,17 +391,17 @@ function sortingFn() {
   // 1. 선택값 담기 : 오름차순(1), 내림차순(2)
   let optVal = this.value;
 
-  console.log('앞에누구?',this.previousElementSibling);
+  console.log("앞에누구?", this.previousElementSibling);
   // this -> 콤보박스자신
   // 앞에있는 형제요소 선택 : this.previousElementSibling
   // 뒤에있는 형제요소 선택 : this.nextElementSibling
-  
-  // 2. 정렬기준값 읽기 : 
+
+  // 2. 정렬기준값 읽기 :
   // -> idx, tit, cont (객체데이터 배열의 속성명)
   // let cta = cta3.value;
   let cta = this.previousElementSibling.value;
-  
-  console.log("바꿔! 정렬!", optVal,cta);
+
+  console.log("바꿔! 정렬!", optVal, cta);
 
   // 2. 분기하기
   // 데이터 대상: targetData 배열
@@ -393,10 +428,9 @@ function sortingFn() {
 
   // 리스트 코드 반영하기 : 대상데이터,출력요소는
   // 호출시 설정된 것으로 셋팅됨!
-  upCode(targetData,targetEle);
+  upCode(targetData, targetEle);
 
-  console.log('타겟데이터:',targetData,
-  '\n타겟요소:',targetEle);
+  console.log("타겟데이터:", targetData, "\n타겟요소:", targetEle);
 } ////////// sortingFn 함수 /////////
 
 //////////////////////////////////////////////
@@ -406,48 +440,48 @@ function sortingFn() {
 // 4. 객체데이터 검색후 배열의 정렬 ////////////
 
 // (1) 출력대상선정: showList4
-const showList4 = dFn.qs('.showList4');
+const showList4 = dFn.qs(".showList4");
 // console.log(showList4);
 
 // (2) 데이터셋팅 : 객체 데이터 배열
 const list2 = [
   {
-      idx: 58,
-      tit: "당근마켓에 가자",
-      cont: "당근마켓이 항상 좋은건 아니야~!!ㅠ.ㅠ",
+    idx: 58,
+    tit: "당근마켓에 가자",
+    cont: "당근마켓이 항상 좋은건 아니야~!!ㅠ.ㅠ",
   },
   {
-      idx: 15,
-      tit: "당근마켓에 가자",
-      cont: "당근마켓이 정말로 싸고 좋다구~!",
+    idx: 15,
+    tit: "당근마켓에 가자",
+    cont: "당근마켓이 정말로 싸고 좋다구~!",
   },
   {
-      idx: 74,
-      tit: "점심에 뭐먹지? 당근이지",
-      cont: "오스틴님 생일 서포트 안내",
+    idx: 74,
+    tit: "점심에 뭐먹지? 당근이지",
+    cont: "오스틴님 생일 서포트 안내",
   },
   {
-      idx: 18,
-      tit: "직돌이는 쉬고싶다~!",
-      cont: "활동정지에 대한 파생글 무통보 삭제 및 경고",
+    idx: 18,
+    tit: "직돌이는 쉬고싶다~!",
+    cont: "활동정지에 대한 파생글 무통보 삭제 및 경고",
   },
   {
-      idx: 104,
-      tit: "올해는 다른 회사로 이직한다!",
-      cont: "⚜️갈라콘 서포트에 많은 참여 부탁드립니다!",
+    idx: 104,
+    tit: "올해는 다른 회사로 이직한다!",
+    cont: "⚜️갈라콘 서포트에 많은 참여 부탁드립니다!",
   },
-]; /////////////// list2 /////////////     
+]; /////////////// list2 /////////////
 
 // 검색/정렬용 변수
 let newList = list2;
 
 // (3) 리스트 초기호출!
 // 위의  upCode() 함수를 호출하여 페이지 찍기
-upCode(list2,showList4);
+upCode(list2, showList4);
 
 // (4) sel4 이벤트 설정하기 ////
 // 데이터와 출력 타겟부터 설정후 정렬함수 호출!
-dFn.addEvt(sel4, "change", ()=>{
+dFn.addEvt(sel4, "change", () => {
   // 정렬용 데이터는 원본 list2 쓰지 않고 newList사용!
   targetData = newList;
   targetEle = showList4;
@@ -456,99 +490,163 @@ dFn.addEvt(sel4, "change", sortingFn);
 
 // (5) 검색 기능 버튼 클릭 이벤트 설정하기 ////
 // - 이벤트대상 : .sbtn
-dFn.addEvt(dFn.qs('.sbtn'),'click',searchingFn);
+dFn.addEvt(dFn.qs(".sbtn"), "click", searchingFn);
 
 // (6) 검색 함수 만들기 ///////////
-function searchingFn(){
+function searchingFn() {
   // 1. 검색어 읽어오기
   // 대상: #stxt
-  let stxt = dFn.qs('#stxt').value;
-  
+  let stxt = dFn.qs("#stxt").value;
+
   // 2. 검색 대상항목 읽어오기
   // 대상: .cta4
-  let cta = dFn.qs('.cta4').value;
-  
-  console.log('입력문자:',stxt,'\n검색기준:',cta);
+  let cta = dFn.qs(".cta4").value;
+
+  console.log("입력문자:", stxt, "\n검색기준:", cta);
 
   // 3. 다중값 리턴 LIKE검색 : 원본데이터(list2)로 검색!
   // filter() + indexOf() 같이 사용!!
-  let res = list2.filter(v=>{
+  let res = list2.filter((v) => {
     // v[객체속성명] -> v[cta]
     // -> cta변수에 idx/tit/cont 중 하나가 들어옴
     // indexOf(검색어) => indexOf(stxt변수값)
-    // 숫자형 데이터일 경우 에러가 발생 
+    // 숫자형 데이터일 경우 에러가 발생
     // String(숫자데이터) -> 문자형으로 변환시켜야됨
-    if(String(v[cta]).indexOf(stxt)!=-1) return true; 
+    if (String(v[cta]).indexOf(stxt) != -1) return true;
   }); ////////// filter ////////////
 
-  console.log('검색결과:',res);
+  console.log("검색결과:", res);
 
   // 4. 출력하기 : upCode()
-  upCode(res,showList4);
+  upCode(res, showList4);
 
   // 5. 원본 데이터는 그대로 두고 새로운 변수를 선언하여
-  // 그 변수의 값을 업데이트 함! 
+  // 그 변수의 값을 업데이트 함!
   // 단, 그 변수 데이터는 정렬시에 사용하도록 한다!
   // -> newList 변수
   newList = res;
-
 } /////////// searchingFn 함수 //////////////
 
 // (7) 전체 리스트 돌아가기 버튼 클릭 시 기능구현 /////
 // 대상 : .fbtn
-dFn.addEvt(dFn.qs('.fbtn'),'click',()=>{
+dFn.addEvt(dFn.qs(".fbtn"), "click", () => {
   // 1. newList 원본 list2로 업데이트
   newList = list2;
-  upCode(newList,showList4);
+  upCode(newList, showList4);
 
   // 2. 검색 초기화
   initSearch();
-
 }); //////// click ////////
 
 // 초기화함수: 검색어 선택
-function initSearch(){
+function initSearch() {
   // 1. 검색어 초기화
-  dFn.qs('#stxt').value = '';
+  dFn.qs("#stxt").value = "";
 
   // 2. 검색어 기준 선택 초기화
-  dFn.qs('.cta4').value = 'idx';
+  dFn.qs(".cta4").value = "idx";
   // 3. 정렬기준 초기화
-  dFn.qs('.sel4').value = '0';
+  dFn.qs(".sel4").value = "0";
 } /////// initSearch
 
-
+// 검색기준 선택박스 변경시 정렬선택 초기화하기
+dFn.addEvt(dFn.qs(".cta4"), "change", () => {
+  dFn.qs(".sel4").value = "0";
+}); //////////// change /////////////
 
 // 샘플 버튼으로 데이터를 검색한 결과를 콘솔에 찍어본다! ////
-dFn.addEvt(dFn.qs('.sample'),'click',()=>{
-
+dFn.addEvt(dFn.qs(".sample"), "click", () => {
   // 1. find() 메서드 확인하기 : 데이터 정확히 일치해야함!
-  let res1 = list2.find(v=>{
-    if(v.tit=='당근마켓에 가자') return true;
+  let res1 = list2.find((v) => {
+    if (v.tit == "당근마켓에 가자") return true;
     // 데이터가 일치하면 배열의 값을 리턴함!
 
     // if(v.tit=='당근마켓에가자') return true;
     // 데이터가 완벽하게 일치하지 않으면 undefined 리턴!
   });
-  console.log("검색어:'당근마켓에가자'\n결과:",res1);
+  console.log("검색어:'당근마켓에가자'\n결과:", res1);
 
   // 2. find() 메서드 LIKE 검색하기 : 데이터일부로 찾음!
   // indexOf() 결과가 -1이 아니면 내용이 있으므로 처리!
   // find() 의 특성상 처음 만나는 데이터 하나만 리턴함!
-  let res2 = list2.find(v=>{
-    if(v.tit.indexOf('다')!=-1) return true;
+  let res2 = list2.find((v) => {
+    if (v.tit.indexOf("다") != -1) return true;
     // 데이터가 일치하면 배열의 값을 리턴함!
   });
-  console.log("검색어:'다'\n결과:",res2);
+  console.log("검색어:'다'\n결과:", res2);
 
   // 3. filter() 메서드로 LIKE 검색하기
   // filter()는 해당결과를 배열로 리턴함(여러개 수집)
-  let res3 = list2.filter(v=>{
-    if(v.tit.indexOf('당근')!=-1) return true;
+  let res3 = list2.filter((v) => {
+    if (v.tit.indexOf("당근") != -1) return true;
     // if(v.tit.indexOf('머스캣')!=-1) return true;
     // 만약에 검색결과가 없으면 빈배열이 리턴됨
   });
-  console.log("검색어:'당근'\n결과:",res3);
-
+  console.log("검색어:'당근'\n결과:", res3);
 }); /////////// click ///////////////////////
+
+// 5. 객체원본 배열로 변환하기
+  // (1) 데이터 : 객체데이터
+  const list3 ={ 
+    item1:{
+        idx: 45,
+        tit: "강남당근마켓에 가자",
+        cont: "다니엘 당근마켓이 정말로 싸고 좋다구~!",
+    },
+    item2:{
+        idx: 94,
+        tit: "나라점심에 뭐먹지?",
+        cont: "강남오스틴님 생일 서포트 안내",
+    },
+    item3:{
+        idx: 22,
+        tit: "다니엘 직돌이는 쉬고싶다~!",
+        cont: "마동석 활동정지에 대한 파생글 무통보 삭제 및 경고",
+    },
+    item4:{
+        idx: 111,
+        tit: "라면 올해는 다른 회사로 이직한다!",
+        cont: "나라 갈라콘 서포트에 많은 참여 부탁드립니다!",
+    },
+}; /////////////// list3 /////////////  
+
+// (2) 객체데이터를 배열로 변경하기
+// 1단계 : 객체속성을 키배열로 변환하기
+// Object.keys(객체) -> 속성값으로 구성된 배열!
+// let myKey = Object.keys(list3);
+// console.log('키배열:',myKey);
+// console.log('키배열 역순정렬:',myKey.reverse());
+
+// 2단계 : 키배열을 객체의 값으로 대체하여 원하는 값배열만들기
+// let myVal = myKey.map(v=>list3[v]);
+// console.log('값배열:',myVal);
+
+// 1,2단계를 한번에 갑배열 만들기 -> 오브젝트.키쓰.맵!
+let newList3 = Object.keys(list3).map(v=>list3[v]);
+console.log('새로운 값배열:',newList3);
+
+// (3) 출력대상선정 : .showList5
+const showList5 = dFn.qs('.showList5');
+
+// (4) 초기출력하기 : upCode()
+upCode(newList3,showList5);
+
+// (5) 정렬기능 이벤트 설정하기 : sortingFn()
+// 이벤트 대상: .sel5
+
+// 데이터 맵핑하기
+dFn.addEvt(dFn.qs('.sel5'),'change',()=>{
+  // 타켓 데이터 설정
+  targetData = newList3;
+  targetEle = showList5;
+});
+
+// change 연결설정
+dFn.addEvt(dFn.qs('.sel5'),'change',sortingFn);
+
+
+// 검색기준 선택박스 변경시 정렬선택 초기화하기
+dFn.addEvt(dFn.qs(".cta5"), "change", () => {
+  dFn.qs(".sel5").value = "0";
+}); //////////// change /////////////
 
