@@ -16,6 +16,8 @@
     />
     <!-- 메인CSS -->
     <link rel="stylesheet" href="./css/main.css" />
+    <script src="./js/jquery-3.7.1.min.js"></script>
+    <script src="./js/jquery-ui.min.js"></script>
     <!-- 메인 JS -->
     <script src="./js/main.js" type="module"></script>
   </head>
@@ -368,7 +370,7 @@
         <div class="preview-part group-part group-part-02">
           <h2 class="stit">미리보기</h2>
           <!-- 파트박스 8개 -->
-          <section class="preview-box">
+          <section class="preview-box sub-view-box">
             <div class="partbox col-3"></div>
             <div class="partbox col-3"></div>
             <div class="partbox col-3"></div>
@@ -382,16 +384,16 @@
         <!-- 현장포토 박스영역 -->
         <div class="group-part group-part-03 live-photo-area">
           <h2 class="stit">현장포토</h2>
-          <div class="grid-box live-box part-box col-12"></div>
+          <div class="grid-box live-box part-box col-12 sub-view-box"></div>
         </div>
         <!-- 대표이미지 박스영역 -->
         <div class="group-part group-part-04 poster-area">
           <h2 class="stit">대표이미지</h2>
-          <div class="grid-box poster-box part-box col-12"></div>
+          <div class="grid-box poster-box part-box col-12 sub-view-box"></div>
         </div>
         <div class="group-part group-part-05 clip-area">
           <h2 class="stit">최신동영상</h2>
-          <div class="clip-box part-box col-12"></div>
+          <div class="clip-box part-box col-12 sub-view-box"></div>
           <!-- 이동버튼박스 -->
           <div class="btn-box">
             <button class="fa-solid fa-chevron-left"></button>
@@ -403,20 +405,42 @@
     <!-- 4. 하단영역 -->
     <div id="footer">
       <footer class="footer inbox">
+        <!-- 파트박스 5개 -->
+
         <!-- 하단링크박스 -->
         <div class="partbox col-8">
             <aside class="info-link">
                 <ul>
-                    <li><a href="#">회사소개</a></li>
-                    <li><a href="#">광고/제휴문의</a></li>
-                    <li><a href="#">이용약관</a></li>
-                    <li><a href="#">개인정보 처리방침</a></li>
-                    <li><a href="#">청소년보호정책</a></li>
-                    <li><a href="#">법적고지</a></li>
-                    <li><a href="#">이메일무단수집거부</a></li>
-                    <li><a href="#">큐톤표</a></li>
-                    <li><a href="#">고객센터</a></li>
-                    <li><a href="#">공지사항</a></li>
+                    <li>
+                        <a href="#">회사소개</a>
+                    </li>
+                    <li>
+                        <a href="#">광고/제휴문의</a>
+                    </li>
+                    <li>
+                        <a href="#">이용약관</a>
+                    </li>
+                    <li>
+                        <a href="#">개인정보 처리방침</a>
+                    </li>
+                    <li>
+                        <a href="#">청소년보호정책</a>
+                    </li>
+                    <li>
+                        <a href="#">법적고지</a>
+                    </li>
+                    <li>
+                        <a href="#">이메일무단수집거부</a>
+                    </li>
+                    <li>
+                        <a href="#">큐톤표</a>
+                    </li>
+                    <li>
+                        <a href="#">고객센터</a>
+                    </li>
+                    <li>
+                        <a href="#">공지사항</a>
+                    </li>
                 </ul>
             </aside>
         </div>
@@ -424,28 +448,34 @@
         <div class="partbox col-4 combo-area">
             <select name="brand" id="brand">
                 <option value="어쩌구">저쩌구</option>
+                <option value="어쩌구">저쩌구</option>
+                <option value="어쩌구">저쩌구</option>
             </select>
             <select name="corp" id="corp">
                 <option value="어쩌구">저쩌구</option>
             </select>
         </div>
-        <!-- 하단로고 박스 -->
+
+        <!-- 하단로고박스 -->
         <div class="partbox col-12">
           <!-- 하단로고 -->
           <h1 class="footer__logo">
             <img src="./images/tvnlogo2.png" alt="" />
           </h1>
         </div>
-        <!-- 회사주소 박스 -->
+
+        <!-- 회사주소박스 -->
         <div class="partbox col-9">
           <address class="corp-info">
             시청자 상담실 (편성 문의 및 시청자 의견) : 080-080-0780 <br>
             (주)씨제이이엔엠?대표이사 : 구창근, 윤상현 사업자정보확인 <br>
-            본점 : (06761) 서울시 서초구 과천대로 870-13 사업장 : (03926) 서울시 마포구 상암산로 66 사업자 등록번호 : 106-81-51510 개인정보 보호책임자 :
+            본점 :
+            (06761) 서울시 서초구 과천대로 870-13 사업장 : (03926) 서울시 마포구
+            상암산로 66 사업자 등록번호 : 106-81-51510 개인정보 보호책임자 :
             강봉관
           </address>
         </div>
-        <!-- sns 박스 -->
+        <!-- SNS박스 -->
         <div class="partbox col-3">
             <aside class="sns-box">
                 <ul>
@@ -479,5 +509,8 @@
         </div>
       </footer>
     </div>
+
+    <!-- 서브 컨텐츠 박스 -->
+    <section class="sub-cont"></section>  
   </body>
 </html>
