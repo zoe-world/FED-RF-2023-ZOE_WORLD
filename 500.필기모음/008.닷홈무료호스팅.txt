@@ -9,6 +9,13 @@
 6. FTP 정보를 확인하여 서버에 웹소스 파일을 업로드한다!
 7. 파일 업로드 후 브라우저에서 확인 시 Ctrl+F5 키를 눌러서 완전 새로고침(새로받기)을 해야한다!(브라우저는 같은 주소의 페이지일 경우 기존에 가지고 있던 캐싱된 파일을 우선 읽어오기 때문에 업데이트된 결과가 화면에 안보일 수 있다!)
 
+FTP 아이디 : zoeworld
+비번 : 돼랑이2390!
+기본제공 도메인 : 	zoeworld.dothome.co.kr
+DB명 : zoeworld
+DB아이디 : zoeworld
+DB 비밀번호: 돼랑이2390!
+
 [ FTP 란? ]
 1. File Transfer Protocol의 약자로 "파일전송규약"이라고 한다.
 비교) HTTP 란? Hyper Text Transfer Protocol (html문서 전송규약)
