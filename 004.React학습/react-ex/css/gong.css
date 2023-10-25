@@ -49,3 +49,12 @@ body{
 .glist img {
     width: 120px;
 }
+.gwrap a{
+    color: #222;
+    text-decoration: none;
+    background-color: #fff;
+    transition: .4s;
+}
+.gwrap a:hover{
+    transform: scale(1.2);
+}
