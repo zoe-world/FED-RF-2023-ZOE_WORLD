@@ -11,6 +11,72 @@ import { gridData, gnbData, previewData, clipData, linkData } from "./data_drama
 // 부드러운 스크롤 적용 //////////
 startSS();
 
+///////////////////////////////
+// 모바일적용 여부 코드 ////////
+let mob = 0; // 0-DT, 1-모바일
+// 모바일 검사함수 /////
+const chkMob = () => {
+if($(window).width()<=1024)mob=1;
+else mob=0;
+console.log('모바일?',mob);
+
+// 부가기능 : 모바일일때 서브메뉴 기본 스타일 지우기
+if(mob) $('.smenu').attr('style','');
+
+} /////// chkMob함수 ///////
+
+// 모바일 검사함수 최초호출
+chkMob();
+// 화면 리사이즈 시 모바일 검사함수 호출
+$(window).resize(chkMob);
+//////////////////////////////////////
+
+///////////////////////////////////
+// 모바일시 기능구현 ///////////////
+///////////////////////////////////
+// 1. 햄버거 버튼 클릭시 메뉴 보이기/숨기기
+// 대상: .ham / .header
+const hEle = $('.header');
+$('.ham').click(()=>{
+  hEle.toggleClass('on');
+
+  // is() 메서드 : 선택요소의 이름확인!
+  console.log('지금.header에 .on있니?',hEle.is('.on'));
+  // 만약 .header.on 이면 body에 스크롤바 숨기기
+  if(hEle.is('.on')) 
+    $('html,body').css({overflow:'hidden'});
+  // 아니면 넣었던 스타일 지우기
+  else $('html,body').attr('style','');
+
+}); //////// click ////////////
+
+
+// 2. 메뉴 클릭시 하위메뉴 보이기 //////
+// 대상: .gnb>li
+$('.gnb li').click(function(){
+  if(!mob) return;//모바일 아니면 나가!
+  console.log('나클릭?');
+  // 서브메뉴 슬라이드 애니로 보이기/숨기기
+  // 대상: .smenu
+  $(this).find('.smenu') // 클릭된li 하위 .smenu
+  .slideToggle(300,'easeInOutQuad') // 열거나 닫거나함
+  .parent() // 부모로 올라감 li
+  .siblings().find('.smenu') // 다른 li들 하위 .smenu
+  .slideUp(300,'easeInOutQuad') // 스르륵 닫힘! 모두
+
+}); //////////// click ////////////////
+
+// 3. 스티키 메뉴 박스 드래그 하여 움직여보기
+// 대상: .dokebi-menu ul
+$('.dokebi-menu ul')
+.draggable({
+  axis:'x', // x축고정
+}); /////////// draggable ////////////
+
+//////////////////////////////////////////////
+
+
+
 // 0. 새로고치면 스크롤바 위치캐싱후 맨위로 이동
 setTimeout(() => {
   // 윈도우 스크롤 맨위로!
@@ -35,7 +101,7 @@ dFn.addEvt(window, "keyup", () => setPos(window.scrollY));
 
 // 대상: .desc-box
 let desc_box = document.querySelectorAll(".desc-box");
-// console.log(desc_box);
+// // console.log(desc_box);
 
 // 모든 캐릭터 설명박스는 이벤트 버블링 막기!!!
 // -> 여기서 마우스휠 됨!!!
@@ -50,7 +116,7 @@ desc_box.forEach((ele) => {
   ****************************************/
 // 1. 대상선정 : .grid-box (.live-box/.poster-box)
 const gridBox = dFn.qsa(".grid-box");
-// console.log("대상:", gridBox);
+// // console.log("대상:", gridBox);
 
 // 2. 대상 코드넣기 함수 호출설정하기 ///////
 gridBox.forEach((ele, idx) => makeGrid(ele, idx));
@@ -80,7 +146,7 @@ function makeGrid(ele, idx) {
 
   hcode += "</ul>";
 
-  //   // console.log(hcode);
+  //   // // console.log(hcode);
 
   // 2. 대상박스에 html코드 넣기
   ele.innerHTML = hcode;
@@ -94,7 +160,7 @@ function makeGrid(ele, idx) {
 // 서브메뉴 넣을 li는 하위 a요소의 텍스트가 gnbData 속성명 1차메뉴와
 // 일치하는 경우 하위 메뉴를 넣어준다!
 const gnbList = dFn.qsa(".gnb>ul>li");
-// console.log("메뉴:", gnbList, "/데이터:", gnbData);
+// // console.log("메뉴:", gnbList, "/데이터:", gnbData);
 
 // 3. 대상에 하위메뉴 태그 만들기
 gnbList.forEach((ele) => {
@@ -103,14 +169,14 @@ gnbList.forEach((ele) => {
 
   // 2.GNB 데이터 읽기
   let gData = gnbData[atxt];
-  // // console.log('텍스트:',atxt,gData);
+  // // // console.log('텍스트:',atxt,gData);
 
   // 3.해당 서브 데이터가 있을 경우 태그 만들어 넣기
   // Array.isArray(gData)로 배열여부를 확인함!
   // 배열값은 태그를 만들어 그자리에 출력: 배열.map().join('')
   if (gData) {
     // 데이터없으면 undefined -> false처리!
-    // console.log("만들어!", atxt);
+    // // console.log("만들어!", atxt);
     ele.innerHTML += `
         <div class="smenu">
           <aside class="smbx">
@@ -153,16 +219,18 @@ gnb.forEach((ele) => {
 
 // 3.함수만들기
 function overFn() {
-  // // console.log('오버',this);
+  if(mob)return; // 모바일이면 나감!
+  // console.log('오버',this);
   // 1.하위 .smbx 높이값 알아오기
   let hv = dFn.qsEl(this, ".smbx").clientHeight;
-  // console.log("높이:", hv);
+  // // console.log("높이:", hv);
   // 2.하위 서브메뉴박스 만큼 .smenu 높이값 주기
   dFn.qsEl(this, ".smenu").style.height = hv + "px";
 } //////////// overFn 함수 ////////////
 
 function outFn() {
-  // // console.log('아웃',this);
+  if(mob)return; // 모바일이면 나감!
+  // // // console.log('아웃',this);
   // 서브메뉴 박스 높이값 0만들기!
   dFn.qsEl(this, ".smenu").style.height = "0px";
 } //////////// outFn 함수 ////////////
@@ -188,7 +256,7 @@ function showMv() {
   if (stsShowMv) return; // 돌아가!
   stsShowMv = 1; // 한번만실행
 
-  // console.log('보여줘~!!!!!');
+  // // console.log('보여줘~!!!!!');
   // 동영상 넣기
   // 대상: 나자신(.intro-mv-img)
   this.innerHTML = `
@@ -214,11 +282,11 @@ let preNewData = previewData.sort((x, y) => {
   return a == b ? 0 : a > b ? -1 : 1;
   // 비?집:(눈?집:놀이동산)
 });
-// console.log(preNewData);
+// // console.log(preNewData);
 
 // 2. 대상선정: .preview-box>div
 const preBox = dFn.qsa(".preview-box>div");
-// console.log(preBox);
+// // console.log(preBox);
 
 // 3. 대상을 순회하여 태그 넣기
 // 데이터 : 역순정렬을 한 미리보기 데이터넣기
@@ -235,7 +303,7 @@ preBox.forEach((ele, idx) => {
 ///////// 최신 동영상 영역 데이터 뿌리기 ////////
 // 대상: .clip-box
 const clipBox = dFn.qs(".clip-box");
-console.log(clipBox);
+// console.log(clipBox);
 
 // 생성할 데이터
 let clipCode = "";
@@ -254,7 +322,7 @@ clipData.forEach((val) => {
   `;
 }); ////////// forEach /////////
 
-console.log(clipCode);
+// console.log(clipCode);
 
 // 코드 넣기
 clipBox.innerHTML = `<ul>${clipCode}</ul>`;
@@ -282,7 +350,7 @@ const BLOCK_NUM = 25.5;
 // 3-5.이동회수 : 단위만큼 이동할 횟수
 let mvNum = 0;
 
-// console.log(btnClip,clipList,'이동 한계수:',LIMIT_MOVE);
+// // console.log(btnClip,clipList,'이동 한계수:',LIMIT_MOVE);
 
 // 4. 이벤트 셋팅하기 ///////////////
 btnClip.forEach((ele) => {
@@ -293,7 +361,7 @@ btnClip.forEach((ele) => {
 function moveClip() {
   // 1. 오른쪽 버튼 여부
   let isR = this.classList.contains("fa-chevron-right");
-  console.log("나야나!", isR);
+  // console.log("나야나!", isR);
   // 2. 버튼별 이동분기
   if (isR) {
     // 오른쪽버튼
@@ -338,13 +406,13 @@ function moveClip() {
 //////////////////////////////////////////
 // 1. 요구사항 - 콤보박스에 맞는 데이터를 바인딩한다
 // 2. 데이터 - linkData
-// console.log('하단콤보박스 데이터:',linkData);
+// // console.log('하단콤보박스 데이터:',linkData);
 
 // 3. 대상선정 : 바인딩할 콤보박스
 // #brand, #corp
 const brandBox = dFn.qs('#brand');
 const corpBox = dFn.qs('#corp');
-console.log('콤보박스:',brandBox,corpBox);
+// console.log('콤보박스:',brandBox,corpBox);
 
 // 4. 데이터 바인딩하기
 // 4-1. 브랜드 바로가기 콤보박스 : 단순바인딩(option만)
@@ -367,7 +435,7 @@ const corpData = Object.keys(linkData.corp);
 // 내부 초기화
 corpBox.innerHTML = '';
 
-// console.log('계열사 데이터:',corpData);
+// // console.log('계열사 데이터:',corpData);
 corpData.forEach(val=>{
   corpBox.innerHTML += `
   <optgroup label="${val}">
@@ -400,21 +468,42 @@ corpData.forEach(val=>{
 /// 제이쿼리로 기능구현하기 //////////////////
 
 // 1. 서브컨텐츠 보이기 기능구현 /////////
-// 대상: .sub-view-box 하위 .partbox 또는 li
+
+// (1) 대상선정 : 
+// 이벤트 대상 : .sub-view-box 하위 .partbox 또는 li
 const subViewBox = 
 $('.sub-view-box .partbox,.sub-view-box li');
-// 변경대상 : sub-cont
-const subContBox = $('.sub-cont');
-console.log(subContBox);
+// 변경대상 : .sub-cont
+const subContBox = $('.sub-cont')
+// console.log(subContBox);
 
-// (2) 이벤트 함수 만들기
+// (2) 이벤트 함수 만들기 ////////
 subViewBox.click(function(){
-  console.log('나야나',this);
-  // 1. 서브박스 내용넣기
+  console.log('나야나!',this);
+
+  // 1. 제목 읽어오기
+  let subTit = 
+  $(this).parents('.sub-view-box').prev().text();
+  // 나자신.부모들(특정클래스).이전형제().글자읽기();
+
+  // 2. 내용 읽어오기
+  let subItem = $(this).text();
+
+  // 3. 서브박스 내용 넣기
   subContBox.html(`
-    <button class="cbtn">x</button>
+    <button class="cbtn">×</button>
+    <div class="sub-inbox inbox">
+      <h1>${subTit}</h1>
+      <div class="sub-item">
+        ${subItem}
+      </div>
+    </div>
   `);
+
+  // 3. 닫기버튼 이벤트설정
+  $('.cbtn').click(()=>subContBox.hide())
+
 
   // 999. 서브박스 보이기
   subContBox.show();
-}); /////////// click /////////
+}); /////////// click //////////
