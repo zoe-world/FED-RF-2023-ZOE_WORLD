@@ -1,7 +1,7 @@
 // 보그 PJ 링크 시스템 JS - linksys2.js
 // -> 카테고리 페이지용 링크시스템 JS
 
-// 내보내기 함수로 변환하자! ///////////
+// 내보내기 함수로 변환하자! /////////////
 export function makeLink(){
 
     // 모든 a요소 기본이동막기
@@ -12,7 +12,7 @@ export function makeLink(){
     // 1-1. 로고링크 : .logo a
     const logo = $('.logo a');
     // 1-2. GNB 메뉴 : .gnb a + 모바일메뉴추가 .mognb a
-    // const gnb = $('.gnb a, .mognb a');
+    // -> 주석!!! const gnb = $('.gnb a, .mognb a');
     // console.log('대상:',logo,gnb);
 
     // 2. 이벤트 설정 및 이동기능 구현하기
@@ -20,7 +20,7 @@ export function makeLink(){
     logo.click(()=>location.href='index.html');
 
     // 2-2. gnb 메뉴 클릭시 카테고리 서브 이동
-    // -> 카테고리에서는 링크 안검
+    // -> 카테고리에서는 링크 안걸음!!! 주석!!!
     // gnb.click(e=>
     //     location.href='category.html?cat='+
     //     $(e.target).text().toLowerCase());
@@ -122,4 +122,4 @@ export function makeLink(){
         $(".mosns a").eq(3).after('<br>');
 
 
-} //////// makeLink 함수 //////////
+} //////////// makeLink 함수 ////////////

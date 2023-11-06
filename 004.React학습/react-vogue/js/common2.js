@@ -1,15 +1,17 @@
 // 보그 PJ - 공통 모듈 JS : common2.js
-// 상단메뉴를 컴포넌트화 하기에 이것을 빼고 뿌리는 JS
-// 난 category 페이지 용이다
+// -> 상단메뉴를 컴포넌트화 하기에 이것을 빼고 뿌리는 JS
+// 난 category 페이지용이다!
 
 // DOM 메서드
 import dFn from './dom.js';
 
-// 상단,하단 공통 데이터 불러오기
-import tData from './data/com_module.js';
-
 // 부드러운 스크롤 모듈
 import { startSS, setPos } from "./smoothScroll23.js";
+
+/////////////////////////////////////////////
+export default function setJSTop(){
+
+
 
 
 // [1] 상단/하단 공통 모듈 넣기 ////////
@@ -21,14 +23,13 @@ const comArea = dFn.qsa('.common-area');
 
 // 상단영역 html 넣기
 // comArea[0].innerHTML = tData.topArea;
-
 // 하단영역 html 넣기
-comArea[1].innerHTML = tData.footerArea;
+// comArea[1].innerHTML = tData.footerArea;
 
 // 모바일 메뉴버튼 요소 추가로 넣기 : .top-area 맨끝추가
-comArea[0].innerHTML += tData.mobtn;
+// comArea[0].innerHTML += tData.mobtn;
 // 모바일 메뉴 박스 추가로 넣기 : #top-area 맨끝추가
-comArea[0].parentElement.innerHTML += tData.mobx;
+// comArea[0].parentElement.innerHTML += tData.mobx;
 
 
 
@@ -85,3 +86,5 @@ $('.sbtn').click(()=>$('.mos').slideToggle(300));
 // toggle() -> show() / hide() 전환
 // slideToggle() -> slideDown() / slideUp() 전환
 // fadeToggle() -> fadeIn() / fadeOut() 전환
+
+} ///////////////// setJSTop 함수 ////
