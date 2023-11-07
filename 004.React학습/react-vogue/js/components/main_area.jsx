@@ -10,6 +10,7 @@ import catData from "./data/category_data.js";
   기능 : 아이템 페이지 타이틀 + 리스트 요소구성
 *******************************************/
 export default function MainCategory(props) {
+  
   // 카테고리 해당 데이터 선택하기
   // 카테고리 전체 객체 데이터 중 해당항목 선택
   const selData = catData[props.category];
@@ -82,7 +83,7 @@ function ItemList(props) {
 
   // 태그처리 구분 코드생성 함수
   const makeCode = (data) => {
-    console.log("배열인가?", Array.isArray(data));
+    // console.log("배열인가?", Array.isArray(data));
     // 배열데이터인 경우 ////
     if (Array.isArray(data)) {
       return (

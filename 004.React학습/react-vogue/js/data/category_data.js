@@ -1,4 +1,4 @@
-// 카테고리 JS 사용 데이터 
+// 카테고리 JS 사용 데이터
 export default {
     "fashion": {
         "제목": "Fashion",

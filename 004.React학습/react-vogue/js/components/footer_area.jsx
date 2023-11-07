@@ -32,8 +32,8 @@ export default function FooterArea() {
         </footer>
       </div>
       {/* 위로가기버튼 */}
-      <a href="#" classNamea="tbtn fi fi-angle-up">
-        <span classNamea="ir">위로가기버튼</span>
+      <a href="#" className="tbtn fi fi-angle-up">
+        <span className="ir">위로가기버튼</span>
       </a>
     </React.Fragment>
   );
