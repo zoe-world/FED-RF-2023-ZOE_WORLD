@@ -30,7 +30,7 @@ export function Banner() {
             } 
         }/////////// for ////////
         // 코드리턴
-        console.log(hcode)
+        // console.log(hcode)
         return hcode;
 
     } ///// makeList 함수 ///////

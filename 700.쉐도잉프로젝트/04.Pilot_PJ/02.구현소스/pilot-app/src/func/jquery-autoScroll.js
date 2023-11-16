@@ -32,14 +32,28 @@ export function autoScroll() {
 
     /****************************************** 
     이벤트 등록하기
+    ->>> 리액트에서 제이쿼리로 이벤트설정시
+    리액트와 충돌되는 문제가 생길 수 있다.
+    예컨대 현재 휠이벤트는 설정되지만, 
+    wheelDelta값이 안찍힘. 해결은
+    순수한 JS로 이벤트를 설정한다.
+    왜 제이쿼리로 이벤트를 설정하면
+    제이쿼리 나름의 객체가 생성되어 처리되므로
+    이것을 단순화하여 이벤트를 걸면, 
+    wheelDelta값이 처리된다.
 ******************************************/
     // 윈도우 휠이벤트 발생시
-    $(window).on("wheel", wheelFn);
+    // $(window).on("wheel", wheelFn); => 제이쿼리 이벤트 말고 순수js 로 처리
+    window.addEventListener("wheel",wheelFn);
 
     // 키보드 이벤트발생시 업데이트
     // 1. Page Up(33) / Up Arrow (38)
     // 2. Page Down(34) / Down Arrow (40)
-    $(document).keydown((e) => {
+    $(document).keydown((e) => { // -> 제이쿼리 이벤트 
+        // 광휠금지
+        if (prot[0]) return;
+        chkCrazy(0);
+        // document.addEventListener('keydown',(e) => {
         // 이전페이지이동
         if (e.keyCode === 33 || e.keyCode === 38) {
             pno--;
@@ -69,11 +83,11 @@ export function autoScroll() {
         if (prot[0]) return;
         chkCrazy(0);
 
-        console.log("휠~~~~~~!");
+        // console.log("휠~~~~~~!");
 
         // 1.휠방향 알아내기
         let delta = e.wheelDelta;
-        console.log(delta);
+        // console.log(delta);
 
         // 2. 방향에 따른 페이지번호 증감
         if (delta < 0) {
@@ -87,7 +101,7 @@ export function autoScroll() {
             // 첫페이지번호에 고정!
         } //// else ////
 
-        console.log(pno);
+        // console.log(pno);
 
         // 3. 스크롤 이동하기 + 메뉴에 클래스"on"넣기
         movePg();
