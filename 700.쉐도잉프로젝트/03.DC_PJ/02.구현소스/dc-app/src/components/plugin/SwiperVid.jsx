@@ -25,9 +25,12 @@ import { Navigation } from "swiper/modules";
 
 import { swVidData } from "../data/swiper_vid"; 
 
-export function SwiperVid() {
+export function SwiperVid(props) {
+
+  // props.cat = 카테고리명 -> 데이터선택 객체속성명
   
-  const selData = swVidData;
+  // 선택 데이터 : 카테고리에 해당하는 데이터를 가져옴
+  const selData = swVidData[props.cat];
 
   // 비디오 보이기 함수
   const showVid = (src,tit) => {

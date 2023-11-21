@@ -18,8 +18,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
 
 export function VidSwipe(props) {
-
-    // props.tit - 비디오 스와이프 타이틀
+    
+    // props.cat - 카테고리명
+    
+    // 비디오스와이프 카테고리별 타이틀
+    const catTit = {
+        main:"LATEST TRAILERS, CLIPS & MORE",
+        movies:"TRAILERS, CLIPS AND MORE",
+        
+    }
     
 
 // 리턴코드 /////////    
@@ -28,9 +35,11 @@ return (
     {/* 모듈코드 */}
     <section className="vid-swbox">
         {/* 1. 모듈타이틀 */}
-        <h2 className="tit">{props.tit}</h2>
-        {/* 2. 스와이퍼 컴포넌트 SwiperVid */}
-        <SwiperVid/>
+        <h2 className="tit">{catTit[props.tit]}</h2>
+        
+        {/* 2. 스와이퍼 컴포넌트 : SwiperVid 
+        -> d*/}
+        <SwiperVid cat={props.cat}/>
         {/* 3. 비디오 재생창 */}
         <section className="vid-bx">
             {/* 비디오 중앙박스 */}
