@@ -1,6 +1,8 @@
 // 메인 페이지 JS - index.js
 import React, { useEffect, useState } from 'react';
 import ReactDOM, { createRoot } from 'react-dom/client';
+// 컨텍스트 API 불러오기
+import { pCon } from './modules/PilotContext';
 import { TopArea } from './layout/TopArea';
 import { MainArea } from './layout/MainArea';
 import { FooterArea } from './layout/FooterArea';
@@ -47,16 +49,20 @@ function App(){
       // pause() 메서드 : 동영상 정지 메서드
 
     }); //////// click ////////
-  }); ////////// useEffect //////////////
+    // 랜더링구역 한번만 실행 : 옵션 []
+    
+  }
+   
+  ,[]); ////////// useEffect //////////////
 
 
   // 리턴코드 //////////////////////////
   return(
-      <>
+      <pCon.Provider value={{chgPgName}}>
         <TopArea cat={pgName} />        
         <MainArea page={pgName} />
         <FooterArea />
-      </>
+      </pCon.Provider>
   )
 
 } ///////////// App 컴포넌트 /////////////
