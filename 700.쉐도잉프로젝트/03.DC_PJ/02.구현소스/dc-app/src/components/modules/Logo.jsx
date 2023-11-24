@@ -54,7 +54,7 @@ export const Logo = (props) => {
         <h1 
             style={myStyle[props.logoStyle]}
             onClick={()=>
-                myCon.chgPage('/')}>
+                myCon.chgPage('/',{})}>
                 <img   
                     src={isrc.logo} 
                     alt="DC logo"
