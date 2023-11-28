@@ -8,6 +8,7 @@ import { wheelFn,evtFn, initSet, zeroPno } from "../func/jquery-autoScroll";
 // 드래그 배너 JS 불러오기
 import { dragBanner } from "../func/drag_banner";
 import { FashionIntro } from "../modules/FashionIntro";
+
 // 제이쿼리 호출
 import $ from "jquery";
 
