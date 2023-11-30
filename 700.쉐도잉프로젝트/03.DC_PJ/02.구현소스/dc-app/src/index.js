@@ -8,7 +8,7 @@ import ReactDOM from "react-dom/client";
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 import { Layout } from "./components/layout/Layout";
 import { Main } from "./components/pages/Main";
-import { Character } from "./components/pages/Character";
+import { Character } from "./components/pages/Charactor";
 import { Comics } from "./components/pages/Comics";
 import { Movies } from "./components/pages/Movies";
 import { Games } from "./components/pages/Games";

@@ -86,9 +86,11 @@ input:focus{
     font-size: 18px;
     font-weight: bold;
 }
+/* 체크박스 숨김 */
 .chkbx input[type=checkbox]{
     display: none;
 }
+/* 체크박스 대신 label로 디자인 노출 */
 .chklb{
     float: right;
     display: block;
@@ -96,6 +98,7 @@ input:focus{
     height: 20px;
     background-color: #ccc;
 }
+/* 체크박스 체크시 라벨디자인 변경 */
 input:checked+.chklb{
     background-color: #0d6efd;
     text-align: center;

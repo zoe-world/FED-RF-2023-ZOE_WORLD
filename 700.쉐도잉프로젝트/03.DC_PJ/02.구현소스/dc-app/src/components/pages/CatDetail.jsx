@@ -1,16 +1,16 @@
 // DC PJ 캐릭터 상세페이지
-// => 캐릭터 리스트로부터 라우팅 이동하여 보이는 페이지
+// -> 캐릭터 리스트로 부터 라우팅 이동하여 보이는 페이지
 
 import { Banner } from "../modules/Banner";
 import { useLocation } from "react-router-dom";
 
-// 캐릭터 상세 페이지 css 불러오기
+// 캐릭터 상세 페이지 CSS불러오기
 import "../../css/cat_detail.css";
 import { CatList } from "../modules/CatList";
 
 export function CatDetail() {
   // 라우터 호출시 전달한 값을 받는다!
-  // 라우터 전달값을 받기위해 useLocation 생성하기
+  // 라우터 전달값을 받기위해 useLocation 생성하기!
   const loc = useLocation();
 
   // 구체적으로 state속성 하위 전달된 객체속성명으로 받는다!
@@ -18,19 +18,20 @@ export function CatDetail() {
   const cname = loc.state.cname;
   // 2. 캐릭터 설명 : "^"로 문단데이터 구분함
   let cdesc = loc.state.cdesc;
-  cdesc = cdesc.split("^"); // split 처리하면 배열에 담김
+  cdesc = cdesc.split("^");
   // 3. 캐릭터 명세 : "^"로 명세항목별 구분함
   let facts = loc.state.facts;
   facts = facts.split("^");
 
   console.log(facts);
+
   return (
     <>
       {/* 1. 배너 컴포넌트 */}
       <Banner category={cname} />
       {/* 2. 상세정보박스 */}
       <div className="detail">
-        {/* 2-1. 캐릭터설명박스 */}
+        {/* 2-1. 캐릭터 설명박스 */}
         <div className="desc-box">
           <h2>{cname}</h2>
           <div className="cdesc">
@@ -46,6 +47,7 @@ export function CatDetail() {
         <div className="facts">
           <div>
             <h3>CHARACTER FACTS</h3>
+            {/* 명세배열만큼 tr로 구성 */}
             <table>
               <tbody>
                 {facts.map((v, i) => (
@@ -59,8 +61,8 @@ export function CatDetail() {
           </div>
         </div>
       </div>
-      {/* 2-3. 캐릭터 리스트 */}
+      {/* 3. 캐릭터 리스트 */}
       <CatList />
     </>
   );
-} /////////// CatDetail 컴포넌트 ////////////
+} /////////// CatDetail 컴포넌트 ////////////////

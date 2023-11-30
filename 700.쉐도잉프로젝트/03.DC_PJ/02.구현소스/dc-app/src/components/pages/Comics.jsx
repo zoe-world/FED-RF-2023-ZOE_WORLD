@@ -1,4 +1,4 @@
-// 코믹스페이지 메인컨텐츠 
+// 코믹스페이지 메인컨텐츠
 
 import { Banner } from "../modules/Banner";
 import { VidIntro } from "../modules/VidIntro";
@@ -6,8 +6,9 @@ import { VidIntro } from "../modules/VidIntro";
 export function Comics(){
     return(
         <>
-            <Banner category="COMICS"/>
+            <Banner category="COMICS" />
             <VidIntro cat="COMICS" cls="on" />
         </>
-    );
-} //////// Comic 컴포넌트 /////
+    )
+
+} ////////////  Comics 컴포넌트 ///////////

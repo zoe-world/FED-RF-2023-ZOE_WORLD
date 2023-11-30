@@ -7,15 +7,17 @@ export function SchPage(){
 
     // 라우터 전달값 받기
     const loc = useLocation();
-    let keyword;
-    if(loc.state) keyword = loc.state.keyword;
-    
-    console.log(' 검색어',keyword)
 
+    // 넘어온 키워드 받기 //////
+    let keyword;
+    // 전달값이 있을 경우 키워드를 읽어게함!
+    if(loc.state) keyword = loc.state.keyword;
+    console.log('검색어:',keyword);
+    
     return(
         <>
             <h1 className="tit">Search Result</h1>
-            <Searching kword={keyword}/>
+            <Searching kword={keyword} />
         </>
     )
 

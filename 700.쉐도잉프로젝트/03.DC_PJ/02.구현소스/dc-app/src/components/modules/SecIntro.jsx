@@ -6,7 +6,7 @@ import { secIntroData } from "../data/sec_intro";
 // 섹션소개모듈용 CSS 불러오기
 import "../../css/sec_intro.css"
 
-// 컨텍스트 AP를 사용하는 컴포넌트 파일에서 불러옴!
+// 컨텍스트 API를 사용하는 컴포넌트 파일에서 불러옴!
 import { dcCon } from "./dcContext";
 import { useContext } from "react";
 
@@ -24,11 +24,11 @@ export function SecIntro(){
     // 선택데이터
     const selData = secIntroData;
 
-    // 라우터 이동객체설정 - 컨텍스트 API 사용으로 이제 사용안함
-    // const goNav = useNavigate();
+    // 라우터 이동객체설정 -> 컨텍스트 API사용!
+    // const goNav = useNavigate(); -> 여기서 사용안함
 
-    // 라우터 이동함수 - 컨텍스트 API 사용으로 이제 사용안함
-    // const chgPage = (txt) => goNav(txt); 
+    // 라우터 이동함수 -> 컨텍스트 API사용!
+    // const chgPage = (txt) => goNav(txt);  -> 여기서 사용안함
 
 
 
@@ -51,10 +51,10 @@ export function SecIntro(){
                     </div>
                     {/* 3. 버튼박스 */}
                     <div className="btnbx">
-                        <button
+                        <button 
                         onClick={()=>
-                            // 컨텍스트 API 함수호출!
-                            myCon.chgPage(v.link,{})}>
+                        // 컨텍스트 API 함수호출!
+                        myCon.chgPage(v.link,{})}>
                             {v.btn.toUpperCase()}
                         </button>
                     </div>

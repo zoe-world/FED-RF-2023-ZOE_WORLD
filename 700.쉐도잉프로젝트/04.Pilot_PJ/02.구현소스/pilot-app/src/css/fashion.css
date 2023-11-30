@@ -100,6 +100,7 @@ body {
     color: #fff;
     padding: 20px 0;
     opacity: 0;
+    z-index: 1;
     /* 1로 투명도 변경될 것임 */
     /* 처음에 투명 */
 }
@@ -206,7 +207,7 @@ body {
 
 
 /* 큰 이미지 배경박스 */
-#bgbx {
+.bgbx {
     position: relative;
     display: none;
 }
