@@ -1,6 +1,6 @@
 // 상품상세보기 컴포넌트
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // 신상품 데이터 가져오기
 import gdata from "../data/glist-items";
 import { sinsangData } from "../data/sinsang";
@@ -15,11 +15,23 @@ export function ItemDetail({ cat, goods }) {
   // 카트사용여부 상태변수 /////////
   const [csts, setCsts] = useState(0);
 
+  // 자식카트 컴포넌트와 함께 상태값 공유할 변수
+  const flag = useRef(true);
+  // -> 이 값이 true 일 때만 새로추가하는 데이터가 반영됨
+  // -> 이 값이 false이면 카트 컴포넌트의 삭제 등 자체기능이 작동함
+  // useRef를 사용한 이유는 리랜더링시에도 값을 유지하면서
+  // 이 값이 변경되어도 리랜더링 되지 않아야 하기 떄문에 선택함!
+
   // 로컬스 변환값 변수 - 상태변수로 리랜더링시 값을 유지하게함!
   const [transData, setTransData] = useState(null);
 
   // 카트에 담기 버튼 클릭시 호출함수 ////
   const useCart = () => {
+    // 카트선택 아이템만 추가하기 위해
+    // 카트 컴포넌트와 공유한 useRef 참조변수인 flag값을
+    // true로 업데이트 한다!
+    flag.current = true;
+
     // 1.선택된 상품을 로컬스토리지에 담기!
     /* 데이터 구성:
     {
@@ -38,8 +50,6 @@ export function ItemDetail({ cat, goods }) {
 
     // 로컬스 변환값 담을 변수
     let localD;
-    // 카트 입력데이터 담을 변수
-    let temp; // find()에서 undefined로 처리될 경우 false
 
     // 1-2.로컬스에 문자형변환하여 담는다
     // (1) 기존 카트 로컬스가 없는 경우
@@ -49,8 +59,24 @@ export function ItemDetail({ cat, goods }) {
       localD.push(selData);
       localStorage.setItem("cart", JSON.stringify(localD));
 
-      // true 처리 되도록 선택데이터 할당!
-      temp = selData;
+      // localD변수에 담긴 로컬스 변환값을 
+        // transData에 담아
+        // CartList 컴포넌트에 전달한다!
+        setTransData(localD);
+
+        console.log(transData);
+
+        setCsts(1);
+
+        // 쇼핑카트버튼 초기화
+        $("#mycart")
+          .removeClass("on")
+          .delay(1000)
+          .fadeIn(300, function () {
+            // 페이드 애니후
+            $(this).addClass("on");
+          }); ////// fadeIn ////////
+          
     } ///// if //////
     // (2) 기존 카트 로컬스가 있는 경우 기존값에 더하기
     else {
@@ -61,7 +87,7 @@ export function ItemDetail({ cat, goods }) {
 
       // **** 읽어온 로컬스에 넣을 상품코드가 있으면
       // 메시지와 함께 넣지 않는다!
-      temp = localD.find((v) => {
+      let temp = localD.find((v) => {
         if (v.idx === selData.idx) return true;
       }); ////// find /////
 
@@ -74,34 +100,31 @@ export function ItemDetail({ cat, goods }) {
 
       // **** 새로운 아이템만 등록! **** ///
       else {
+        
         // 객체변환 데이터에 push로 추가!
         localD.push(selData);
         // // 다시 문자형변환하여 넣기
         localStorage.setItem("cart", JSON.stringify(localD));
+
+        // localD변수에 담긴 로컬스 변환값을 
+        // transData에 담아
+        // CartList 컴포넌트에 전달한다!
+        setTransData(localD);
+
+        console.log(transData);
+
+        setCsts(1);
+
+        // 쇼핑카트버튼 초기화
+        $("#mycart")
+          .removeClass("on")
+          .delay(1000)
+          .fadeIn(300, function () {
+            // 페이드 애니후
+            $(this).addClass("on");
+          }); ////// fadeIn ////////
       } ///////// else //////////
     } //////////// else /////////////
-
-    // ****** 공통처리 **** (카트에 담긴 경우만!!!)
-    // temp에 데이터가 담긴 경우에만 공통업데이트함!
-    if (temp) {
-      // localD변수에 담긴 로컬스 변환값을
-      // transData에 담아
-      // CartList 컴포넌트에 전달한다!
-      setTransData(localD);
-
-      console.log(transData);
-
-      setCsts(1);
-
-      // 쇼핑카트버튼 초기화
-      $("#mycart")
-        .removeClass("on")
-        .delay(1000)
-        .fadeIn(300, function () {
-          // 페이드 애니후
-          $(this).addClass("on");
-        }); ////// fadeIn ////////
-    } //////////// if /////////////////
   }; /////////// useCart함수 ////////////
 
   // 선택데이터 : 전체데이터[분류명][상품코드].split('^')
@@ -271,7 +294,10 @@ export function ItemDetail({ cat, goods }) {
       </div>
 
       {/* 카트리스트 */}
-      {csts && <CartList selData={transData} />}
+      {csts && <CartList selData={transData} flag={flag}/>}
+      {/* useRef 변수인 flag 를 보내면 자식 컴포넌트에서도 */}
+      {/* 이 값을 참조할 뿐만 아니라 변경도 가능하다!!!! */}
+      {/* 주의! useRef변수는 사용시 변수명.current 를 꼭 쓴다!! */}
     </>
   );
 } /////////// ItemDetail 컴포넌트 ///////////
