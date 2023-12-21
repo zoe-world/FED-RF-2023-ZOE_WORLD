@@ -3,5 +3,6 @@
         "main":["MEN","WOMEN","STYLE"],
         "men":["NEW MEN'S ARRIVAL","WINDBREAKER","BEACH STYLE","SPORT STYLE"],
         "women":["NEW WOMEN'S ARRIVAL", "SPORTY FASHION", "FREE STYLE", "COMFORTABLE STYLE"],
-        "style":["SPECIAL SUMMER STYLE", "GOLF LIFE", "CAMPING STYLE", "SPORT STYLE"]
+        "style":["SPECIAL SUMMER STYLE", "GOLF LIFE", "CAMPING STYLE", "SPORT STYLE"],
+        "glist":["Filter List","Paging List","More List"],
     }; //////////////// gnbData /////////

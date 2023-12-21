@@ -1,16 +1,20 @@
 // 신상품 컴포넌트 ////////
 
-import { useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
+// 컨텍스트 API 불러오기
+import { pCon } from "./PilotContext";
 
 // 신상품 데이터 가져오기
 import { sinsangData } from "../data/sinsang";
 
 import $ from 'jquery';
-import { useRef } from "react";
 
 export function SinSang({cat,chgItemFn}) {
   // cat - 카테고리 분류명
   // chgItemFn - 선택상품정보변경 부모함수
+
+  // 컨텍스트 API사용하기
+  const myCon = useContext(pCon);
 
   // 선택데이터 : 해당카테고리 상품데이터만 가져온다!
   const selData = sinsangData[cat];
@@ -71,6 +75,7 @@ export function SinSang({cat,chgItemFn}) {
     .animate({
       top: '110%',
       opacity: 1,
+      zIndex: 1,
     },300)
 
   }; /////////// showInfo함수 ///////////////
@@ -91,8 +96,8 @@ function addComma(x) {
   };
 
   // 신상품 리스트 이동함수 사용변수 ///
-  // 위치값변수(left값) => 리랜더링시 기존값을 유지하도록 
-  // useRef를 사용한다 사용시 lpps.current 로 사용해야함!!
+  // 위치값변수(left값) -> 리랜더링시 기존값을 유지하도록
+  // ->  useRef를 사용한다!! -> 변수명.current로 사용!
   let lpos = useRef(0);
   // 재귀호출 상태값(1-호출,0-멈춤)
   let callSts = 1;
@@ -121,21 +126,11 @@ function addComma(x) {
 
   }; ////////// flowList ////////////
 
-  // 오버/아웃시 이동제어함수 ///
-  const flowOut = () => {
-    
-
-  }; /////////
-
-
-  // 랜더링 후 한번만 실행구역 //////
+  // 랜더링 후  한번만 실행구역 //////
   useEffect(()=>{
     // 대상선정: .flist
-
     // 신상리스트이동함수 호출!
-    flowList($('.flist'))
-
-
+    flowList($('.flist'));
   },[]); ////////// useEffect ////////
 
 
@@ -145,7 +140,9 @@ function addComma(x) {
     <>
       <h2 className="c1tit">
         NEW MEN'S ARRIVAL
-        <button>전체리스트</button>
+        <button
+          onClick={()=>myCon.chgPgName('glist')}
+        >전체리스트</button>
       </h2>
       <div className="flowbx"
       onMouseEnter={()=>callSts=0} 

@@ -564,7 +564,7 @@ export function Board() {
 
     // 3. [ 카운트 증가하기 조건검사 ] //////////
 
-    // 세션스에 등록된 글번호만큼 돌다가 같은 글이면
+    // 3-1. 세션스에 등록된 글번호만큼 돌다가 같은 글이면
     // isOK값을 false로 처리함!
     // 주의: cntIdx는 숫자로만 된 배열이다! [1,2,5,6]
     cntIdx.some((v) => {
@@ -574,6 +574,24 @@ export function Board() {
         return true;
       } /// if /////
     }); /////////// some //////
+
+    // 3-2. 로그인한 사용자일 경우 로그인 사용자계정과 같은
+    // 글이면 증가하지 않는다!
+    if(localStorage.getItem('minfo')){
+      // 1.사용자 로그인정보 로컬스
+      let minfo = 
+      JSON.parse(localStorage.getItem('minfo'));
+
+      // 2.로그인 아이디
+      let cUid = minfo.uid;
+
+      // 3.로그인 아이디 === 현재글 아이디 검사통과시 
+      // isOK 값 false처리로 조회수 증가막기!
+      if(cUid === cData.current.uid) isOK = false;
+
+      console.log('로그인사용자검사',cUid,isOK);
+
+    } ////////////// if //////////////
 
     // 4. [ 카운트 증가하기 ] ////////
     if (isOK) {
