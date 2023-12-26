@@ -134,7 +134,7 @@ export function Board() {
           <td colSpan="5">There is no data.</td>
         </tr>
       );
-    } ////// if /////////    
+    } ////// if /////////
 
     // if문에 들어가지 않으면 여기를 리턴함!
     return tempData.map((v, i) => (
@@ -155,8 +155,6 @@ export function Board() {
         <td>{v.cnt}</td>
       </tr>
     ));
-
-    
   }; /////////// bindList 함수 ////////////
 
   /************************************* 
@@ -577,20 +575,18 @@ export function Board() {
 
     // 3-2. 로그인한 사용자일 경우 로그인 사용자계정과 같은
     // 글이면 증가하지 않는다!
-    if(localStorage.getItem('minfo')){
+    if (localStorage.getItem("minfo")) {
       // 1.사용자 로그인정보 로컬스
-      let minfo = 
-      JSON.parse(localStorage.getItem('minfo'));
+      let minfo = JSON.parse(localStorage.getItem("minfo"));
 
       // 2.로그인 아이디
       let cUid = minfo.uid;
 
-      // 3.로그인 아이디 === 현재글 아이디 검사통과시 
+      // 3.로그인 아이디 === 현재글 아이디 검사통과시
       // isOK 값 false처리로 조회수 증가막기!
-      if(cUid === cData.current.uid) isOK = false;
+      if (cUid === cData.current.uid) isOK = false;
 
-      console.log('로그인사용자검사',cUid,isOK);
-
+      console.log("로그인사용자검사", cUid, isOK);
     } ////////////// if //////////////
 
     // 4. [ 카운트 증가하기 ] ////////
@@ -600,7 +596,7 @@ export function Board() {
       data.some((v) => {
         if (Number(v.idx) === Number(cidx)) {
           // 기존 cnt항목의 숫자를 1증가하여 업데이트!
-          v.cnt = Number(v.cnt)+1;
+          v.cnt = Number(v.cnt) + 1;
           // 여기서 나감!(break역할!)
           return true;
         } ////////// if //////////
@@ -608,19 +604,19 @@ export function Board() {
 
       // 원본 데이터에 반영하기 : 꼭해야만 리스트가 업데이트됨!
       orgData = data;
-      
-      // 반영된 배열 데이터를 다시 'bdata' 로컬스에 넣기
-      localStorage.setItem('bdata',JSON.stringify(data));
 
+      // 반영된 배열 데이터를 다시 'bdata' 로컬스에 넣기
+      localStorage.setItem("bdata", JSON.stringify(data));
     } //////////// if /////////////
 
     // 5. [ 현재글 세션스에 처리하기 ] ////////
-    if(isOK){ // 조회수 증가일 경우에만 글번호 세션스 등록!
+    if (isOK) {
+      // 조회수 증가일 경우에만 글번호 세션스 등록!
       // 세션스 배열에 idx값 넣기
       cntIdx.push(Number(cidx));
-  
+
       console.log("넣은후:", cntIdx);
-  
+
       // 세션스에 저장하기
       sessionStorage.setItem("cnt-idx", JSON.stringify(cntIdx));
     } /////////////// if //////////////
@@ -632,32 +628,35 @@ export function Board() {
       {
         /* 1. 게시판 리스트 : 게시판 모드 'L'일때 출력 */
         bdMode === "L" && (
-          <table className="dtbl" id="board">
-            <caption>OPINION</caption>
-            {/* 상단 컬럼명 표시영역 */}
-            <thead>
-              <tr>
-                <th>Number</th>
-                <th>Title</th>
-                <th>Writer</th>
-                <th>Date</th>
-                <th>Hits</th>
-              </tr>
-            </thead>
+          <>
+          <h1 className="tit">OPTION</h1>
+            <table className="dtbl" id="board">
+              {/* <caption>OPINION</caption> */}
+              {/* 상단 컬럼명 표시영역 */}
+              <thead>
+                <tr>
+                  <th>Number</th>
+                  <th>Title</th>
+                  <th>Writer</th>
+                  <th>Date</th>
+                  <th>Hits</th>
+                </tr>
+              </thead>
 
-            {/* 중앙 레코드 표시부분 */}
-            <tbody>{bindList()}</tbody>
+              {/* 중앙 레코드 표시부분 */}
+              <tbody>{bindList()}</tbody>
 
-            {/* 하단 페이징 표시부분 */}
-            <tfoot>
-              <tr>
-                <td colSpan="5" className="paging">
-                  {/* 페이징번호 위치  */}
-                  {pagingLink()}
-                </td>
-              </tr>
-            </tfoot>
-          </table>
+              {/* 하단 페이징 표시부분 */}
+              <tfoot>
+                <tr>
+                  <td colSpan="5" className="paging">
+                    {/* 페이징번호 위치  */}
+                    {pagingLink()}
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </>
         )
       }
       {

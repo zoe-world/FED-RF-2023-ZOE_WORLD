@@ -1,6 +1,14 @@
 /* 게시판 모듈용 CSS - board.css  */
 
 /* CSS Document */
+/* 검색옵션박스1 */
+.selbx {
+    box-sizing: border-box;
+    padding: 20px 10px 10px;
+    max-width: 90%;
+    width: 950px;
+    margin: 0 auto;
+}
 /*테이블 디자인*/
 .dtbl {
     /*테이블전체*/
