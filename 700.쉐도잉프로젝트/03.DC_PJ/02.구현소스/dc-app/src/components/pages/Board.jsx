@@ -37,14 +37,25 @@ let orgData;
 // 로컬스가 있으면 그것 넣기
 if (localStorage.getItem("bdata"))
   orgData = JSON.parse(localStorage.getItem("bdata"));
-// 로컬스 없으면 제이슨 데이터 넣기
-else orgData = baseData;
+// 로컬스 없으면 제이슨 데이터 넣기 + 로컬스 생성하기!
+else {
+  // 기본 데이터 제이슨에서 가져온것 넣기
+  orgData = baseData;
+} /////// else /////////
 // else orgData = [];
 
 // // console.log(org);
 
 // ******* Borad 컴포넌트 ******* //
 export function Board() {
+  // 보드 데이터가 로컬스에 없으면 생성하기!
+  if (!localStorage.getItem("bdata")) {
+    // !연산자로 false일때 실행
+    // 로컬스 'bdata'가 없으므로 여기서 최초 생성하기
+    // -> 조회수증가시 로컬스 데이터로 확인하기 때문!
+    localStorage.setItem("bdata", JSON.stringify(orgData));
+  } //////////// if ///////////////
+
   // 기본사용자 정보 셋업 함수 호출
   initData();
 
@@ -558,7 +569,7 @@ export function Board() {
     let cntIdx = JSON.parse(sessionStorage.getItem("cnt-idx"));
 
     // 배열여부확인
-    console.log(Array.isArray(cntIdx));
+    console.log(Array.isArray(cntIdx), cntIdx);
 
     // 3. [ 카운트 증가하기 조건검사 ] //////////
 
@@ -588,6 +599,8 @@ export function Board() {
 
       console.log("로그인사용자검사", cUid, isOK);
     } ////////////// if //////////////
+
+    console.log(localStorage.getItem("bdata"));
 
     // 4. [ 카운트 증가하기 ] ////////
     if (isOK) {
@@ -629,9 +642,28 @@ export function Board() {
         /* 1. 게시판 리스트 : 게시판 모드 'L'일때 출력 */
         bdMode === "L" && (
           <>
-          <h1 className="tit">OPTION</h1>
+          {/* 전체 타이틀 */}
+            <h1 className="tit">OPINION</h1>
+            
+            {/* 검색옵션박스 */}
+            <div class="selbx">
+              <select name="cta" id="cta" className="cta">
+                <option value="tit">Title</option>
+                <option value="cont">Contents</option>
+                <option value="unm">Writer</option>
+              </select>
+              <select name="sel" id="sel" className="sel">
+                <option value="0">JungYeol</option>
+                <option value="1">Ascending</option>
+                <option value="2">Descending</option>
+              </select>
+              <input id="stxt" type="text" maxlength="50" />
+              <button class="sbtn">Search</button>
+            </div>
+
+            {/* 리스트 테이블 */}
             <table className="dtbl" id="board">
-              {/* <caption>OPINION</caption> */}
+              {/* <caption></caption> */}
               {/* 상단 컬럼명 표시영역 */}
               <thead>
                 <tr>
