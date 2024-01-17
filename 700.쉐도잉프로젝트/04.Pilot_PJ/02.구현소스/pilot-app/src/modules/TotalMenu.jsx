@@ -15,7 +15,7 @@ export function TotalMenu() {
     myCon.chgPgName(txt);
     // 전체박스 숨기기
     document.querySelector('.ham').click();
-  } //////// goPage 메서드 ///////////
+  }; //////// goPage 메서드 ///////////
 
   // 코드 리턴 //////////////////////
   return (
@@ -31,7 +31,10 @@ export function TotalMenu() {
           <dl>
             <dt>
               <a href="#" 
-              onClick={()=>goPage('men')}>MEN</a>
+              onClick={(e)=>{
+                e.preventDefault();
+                goPage('men');
+              }}>MEN</a>
             </dt>
             <dd>
               <a href="#">T-SHIRT</a>
@@ -48,8 +51,11 @@ export function TotalMenu() {
           </dl>
           <dl>
             <dt>
-              <a href="#"
-              onClick={()=>goPage('women')}>WOMEN</a>
+              <a href="#" 
+              onClick={(e)=>{
+                e.preventDefault();
+                goPage('women');
+              }}>WOMEN</a>
             </dt>
             <dd>
               <a href="#">T-SHIRT</a>
@@ -66,8 +72,11 @@ export function TotalMenu() {
           </dl>
           <dl>
             <dt>
-              <a href="#"
-              onClick={()=>goPage('style')}>STYLE</a>
+              <a href="#" 
+              onClick={(e)=>{
+                e.preventDefault();
+                goPage('style');
+              }}>STYLE</a>
             </dt>
             <dd>
               <a href="#">COLLECTION</a>

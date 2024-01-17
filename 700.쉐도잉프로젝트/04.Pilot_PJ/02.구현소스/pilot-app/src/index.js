@@ -15,6 +15,8 @@ import "jquery-ui-dist/jquery-ui";
 
 // 페이지 공통 CSS
 import "./css/common.css";
+// 페이지 공통 미디어쿼리 (max-width:800px)
+import "./css/media.css";
 
 // 최상위 Root 컴포넌트 ///////
 function App() {
@@ -35,7 +37,7 @@ function App() {
 
   // 카트 사용여부 초기값은 로컬스 'cart'가 있으면 1
   // 없으면 0 으로 셋팅해준다!
-  let stsVal = 0;
+  let stsVal = false;
   let transVal = null;
 
   // 카트셋팅에 필요한 데이터를 로컬스에 따라 셋팅함!
@@ -43,7 +45,7 @@ function App() {
     // 로컬스가 있으므로 객체화하기!
     transVal = JSON.parse(localStorage.getItem("cart"));
     // 로컬스 객체화 데이터 개수가 0이 아닐때만 상태값 1로 노출하기
-    if (transVal.length !== 0) stsVal = 1;
+    if (transVal.length !== 0) stsVal = true;
   } ///// if ////////
 
   console.log("로컬스있니?", stsVal);
@@ -92,11 +94,13 @@ function App() {
 
     // 랜더링구역 한번만 실행 : 옵션 []
   }, []); ////////// useEffect //////////////
+  
 
-  // 처음 로딩시 스크롤 상단이동 //////
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-  }, []); ///// useLayoutEffect //////////
+  useEffect(()=>{
+    // 전체상품리스트 페이지를 위한 초기화변수확인
+    console.log('초기화상태값:',gInit.current);
+
+  });
 
   // GList 페이지에서 사용하는 모드구분 참조변수
   const [gMode,setGMode] = useState('F');
@@ -117,7 +121,7 @@ function App() {
     6. setCsts - 로컬스에 카트정보 셋업여부
     7. gMode, setGMode 
       - 전체 리스트 페이지 뷰모드 구분
-    8. gInit - 초기화여부를 결정하는 변수
+    8. gInit - 초기화 여부를 결정하는 변수
   *****************************************/
 
   // 리턴코드 //////////////////////////
