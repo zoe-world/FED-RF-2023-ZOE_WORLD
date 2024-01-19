@@ -1,6 +1,6 @@
 // DC PJ 회원가입 페이지 컴포넌트
 
-// 컨텍스트 API
+// 컨텍스트 API 불러오기
 import { dcCon } from "../modules/dcContext";
 
 // 회원가입 CSS 불러오기
@@ -12,9 +12,10 @@ import { useContext, useState } from "react";
 import { initData } from "../func/mem_fn";
 
 export function Member() {
-  // 컨텍스트 api 사용하기
+
+  // 컨텍스트 API 사용하기
   const myCon = useContext(dcCon);
-  
+
   // [ 회원가입 페이지 요구사항 ]
   // -> 각 입력항목별로 유효성검사를 실행함
   // -> 특이사항: 글자를 입력할때 마다 검사
@@ -86,42 +87,39 @@ export function Member() {
     //       (false이면 에러상태값 true)
     if (valid.test(e.target.value)) {
       // 1.사용중 아이디인지 검사(로컬쓰 셋팅후 추가!)
-        // 로컬스토리지 체크함수호출(없으면 생성함!)
-        initData();
+      // 로컬스토리지 체크함수호출(없으면 생성함!)
+      initData();
 
-        // 1. 로컬스 변수할당
-        let memData = localStorage.getItem("mem-data");
+      // 1. 로컬스 변수할당
+      let memData = localStorage.getItem("mem-data");
 
-        // 2. 로컬스 객체변환
-        memData = JSON.parse(memData);
+      // 2. 로컬스 객체변환
+      memData = JSON.parse(memData);
 
-        // 3. 기존 아이디가 있으면 상태값 false로 업데이트
-        let isOK = true;
+      // 3. 기존 아이디가 있으면 상태값 false로 업데이트
+      let isOK = true;
 
-        // 4. 검사돌리기 - 배열돌아라
-        memData.forEach(v=>{
-            // 기존아이디와 같은 경우
-            if(v.uid===e.target.value){
-                // 메시지 변경 
-                setIdMsg(msgId[1]);
-                // 아이디에러상태값 업데이트
-                setUserIdError(true);
-                // 존재여부 업데이트
-                isOK = false;
-            } ////////// if ///////
-        }); /////////forEach
-
-        // 5. 기존 아이디 없으면 들어감 :::: 최종통과시 결과
-        if(isOK){
-            // 메시지 변경 
-            setIdMsg(msgId[0]);
+      // 4. 검사돌리기
+      memData.forEach(v=>{
+        // 기존아이디와 같은 경우
+        if(v.uid===e.target.value){
+            // 메시지변경
+            setIdMsg(msgId[1]);
             // 아이디에러상태값 업데이트
-            setUserIdError(false);
+            setUserIdError(true);
             // 존재여부 업데이트
-        }
+            isOK = false;
+        } ////// if ////////
+      }); /////// forEach /////////
 
-      // 2. 결과반영하기
-      setUserIdError(false);
+      // 5. 기존 아이디 없으면 들어감 : 최종통과시 결과
+      if(isOK){
+        // 메시지변경
+        setIdMsg(msgId[0]);
+        // 아이디에러상태값 업데이트
+        setUserIdError(false);
+      } ////// if /////////////
+
     } //////////////// if ////////////////
     // 에러일때 ////////////
     else {
@@ -246,13 +244,15 @@ export function Member() {
       // 5. 로컬스에 반영하기
       localStorage.setItem("mem-data", JSON.stringify(memData));
 
-      // 6. 버튼텍스트변경(재미요소)
-      document.querySelector(".sbtn").innerText = "넌 이제 회원인거야~!";
+      // 6. 버튼 텍스트변경(재미로...)
+      document.querySelector(".sbtn").innerText = 
+      "넌 이제 회원인거야~!";
 
-      // 7. 페이지이동 : 로그인페이지로!
-      setTimeout(() => {
+      // 7. 페이지 이동 : 로그인페이지로!
+      setTimeout(()=>
         myCon.chgPage('login',{})
-      }, 1000);
+      ,1000);
+
     } ///////// if ////////
     // 3. 불통과시
     else {
